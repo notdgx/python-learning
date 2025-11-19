@@ -36,7 +36,7 @@ I will be posting regularly some big topics may require 2-3 days hope u can unde
 	  www.linkedin.com/in/daisydhiman
 	
 	• GitHub : 
-    https://github.com/daisydhiman
+    https://github.com/notdgx
 
 	• X (twitter) :
 	  https://x.com/daisydhimanx

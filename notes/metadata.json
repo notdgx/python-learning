@@ -1,18 +1,1307 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-08-30T12:57:05+00:00",
+  "generatedAt": "2026-08-30T21:35:27+05:30",
   "contentRoot": "notes",
   "sections": {
     "notes": {
       "id": "notes",
       "title": "Python Learning",
-      "topics": []
+      "topics": [
+        {
+          "id": "5cd5552eeadc99ea",
+          "title": "Basics",
+          "order": 0,
+          "slug": "basics",
+          "subtopics": [
+            {
+              "id": "38dc4d70f59fff07",
+              "title": "Intro And Internal Working",
+              "order": 0,
+              "slug": "intro-and-internal-working",
+              "notes": [
+                {
+                  "id": "89b0d37d5ba8aa62",
+                  "title": "LowLevelExecution",
+                  "route": "/notes/basics/intro-and-internal-working/lowlevelexecution",
+                  "sourcePath": "notes/00-Basics/00-Intro-and-Internal-Working/00-LowLevelExecution.md",
+                  "order": 0,
+                  "date": "2026-08-30",
+                  "time": "19:34:11+05:30",
+                  "headings": [
+                    {
+                      "id": "topics",
+                      "text": "Topics",
+                      "level": 1
+                    },
+                    {
+                      "id": "00-python",
+                      "text": "00 -> Python",
+                      "level": 1
+                    },
+                    {
+                      "id": "low-level-structure",
+                      "text": "Low Level structure",
+                      "level": 2
+                    },
+                    {
+                      "id": "cpp",
+                      "text": "CPP",
+                      "level": 3
+                    },
+                    {
+                      "id": "python",
+                      "text": "Python",
+                      "level": 3
+                    },
+                    {
+                      "id": "python-program-running",
+                      "text": "Python Program Running",
+                      "level": 3
+                    },
+                    {
+                      "id": "bytecode",
+                      "text": "==ByteCode==",
+                      "level": 4
+                    },
+                    {
+                      "id": "pvm",
+                      "text": "PVM",
+                      "level": 4
+                    },
+                    {
+                      "id": "properites",
+                      "text": "Properites",
+                      "level": 2
+                    },
+                    {
+                      "id": "ats",
+                      "text": "ATS",
+                      "level": 3
+                    },
+                    {
+                      "id": "step-1-lexing",
+                      "text": "STEP 1  : ==LEXING==",
+                      "level": 4
+                    },
+                    {
+                      "id": "step-2-parsing",
+                      "text": "STEP 2 : ==PARSING==",
+                      "level": 4
+                    },
+                    {
+                      "id": "properties",
+                      "text": "Properties",
+                      "level": 4
+                    },
+                    {
+                      "id": "t-he-peephole-optimizer",
+                      "text": "T==he Peephole Optimizer==",
+                      "level": 4
+                    },
+                    {
+                      "id": "bytecode-2",
+                      "text": "==ByteCode==",
+                      "level": 3
+                    },
+                    {
+                      "id": "memory",
+                      "text": "Memory",
+                      "level": 3
+                    },
+                    {
+                      "id": "the-pvm-stack",
+                      "text": "THE PVM Stack",
+                      "level": 4
+                    },
+                    {
+                      "id": "the-fake-stack-eval-stack",
+                      "text": "THE FAKE STACK : EVAL STACK",
+                      "level": 4
+                    },
+                    {
+                      "id": "the-process-heap",
+                      "text": "THE PROCESS HEAP",
+                      "level": 4
+                    },
+                    {
+                      "id": "interpreater",
+                      "text": "Interpreater",
+                      "level": 4
+                    },
+                    {
+                      "id": "flow",
+                      "text": "Flow",
+                      "level": 5
+                    }
+                  ],
+                  "references": [],
+                  "sha256": "0a59c9369f9c71a8bd476ff1df951edfed5af414fa9e465c8c55e4b5439bcba2",
+                  "sizeBytes": 24574
+                },
+                {
+                  "id": "a5b151cb22587612",
+                  "title": "MultilangIntegration",
+                  "route": "/notes/basics/intro-and-internal-working/multilangintegration",
+                  "sourcePath": "notes/00-Basics/00-Intro-and-Internal-Working/01-MultilangIntegration.md",
+                  "order": 1,
+                  "date": "2026-08-30",
+                  "time": "19:34:11+05:30",
+                  "headings": [
+                    {
+                      "id": "topics",
+                      "text": "Topics",
+                      "level": 1
+                    },
+                    {
+                      "id": "multilang-projects",
+                      "text": "MultiLang Projects",
+                      "level": 1
+                    },
+                    {
+                      "id": "mechanism-1-ffi-foreign-function-interface",
+                      "text": "MECHANISM 1 : FFI (Foreign Function Interface)",
+                      "level": 2
+                    },
+                    {
+                      "id": "mechanism-2-python-c-extensions",
+                      "text": "MECHANISM 2 : Python C Extensions",
+                      "level": 2
+                    },
+                    {
+                      "id": "mechanism-3-ctypes-calling-any-compiled-library",
+                      "text": "MECHANISM 3 : ==ctypes== (Calling ANY compiled library)",
+                      "level": 2
+                    },
+                    {
+                      "id": "how-numpy-uses-this",
+                      "text": "HOW NUMPY USES THIS",
+                      "level": 3
+                    },
+                    {
+                      "id": "mechanism-4-subprocess-completely-separate-processes",
+                      "text": "MECHANISM 4 : ==SUBPROCESS (Completely Separate Processes)==",
+                      "level": 2
+                    },
+                    {
+                      "id": "mechanism-5-shared-memory-processes-sharing-ram-directly",
+                      "text": "MECHANISM 5 : ==SHARED MEMORY (Processes sharing RAM directly)==",
+                      "level": 2
+                    },
+                    {
+                      "id": "boundaries",
+                      "text": "Boundaries",
+                      "level": 2
+                    },
+                    {
+                      "id": "game-engines",
+                      "text": "Game Engines",
+                      "level": 1
+                    },
+                    {
+                      "id": "the-key-value-tables",
+                      "text": "The Key Value Tables",
+                      "level": 3
+                    },
+                    {
+                      "id": "python-as-external-config",
+                      "text": "PYTHON AS EXTERNAL CONFIG",
+                      "level": 3
+                    },
+                    {
+                      "id": "full-architecture",
+                      "text": "FULL ARCHITECTURE",
+                      "level": 3
+                    },
+                    {
+                      "id": "ml-implementation",
+                      "text": "ML Implementation",
+                      "level": 2
+                    },
+                    {
+                      "id": "ai-ml-architecture",
+                      "text": "AI/ML ARCHITECTURE",
+                      "level": 3
+                    },
+                    {
+                      "id": "py-vs-c",
+                      "text": "Py vs C",
+                      "level": 3
+                    },
+                    {
+                      "id": "summary",
+                      "text": "Summary",
+                      "level": 1
+                    }
+                  ],
+                  "references": [],
+                  "sha256": "0f7eeba6366f70775ed0ee4db2df8b0d783c746a0ef69342b09abcb50c317876",
+                  "sizeBytes": 25808
+                },
+                {
+                  "id": "8b51bb59bc19dfe9",
+                  "title": "DataTypesLowLevel 1",
+                  "route": "/notes/basics/intro-and-internal-working/datatypeslowlevel-1",
+                  "sourcePath": "notes/00-Basics/00-Intro-and-Internal-Working/02-DataTypesLowLevel-1.md",
+                  "order": 2,
+                  "date": "2026-08-30",
+                  "time": "19:34:11+05:30",
+                  "headings": [
+                    {
+                      "id": "topics",
+                      "text": "Topics",
+                      "level": 1
+                    },
+                    {
+                      "id": "cpp-vs-py",
+                      "text": "Cpp vs Py",
+                      "level": 1
+                    },
+                    {
+                      "id": "datatypes",
+                      "text": "Datatypes",
+                      "level": 1
+                    },
+                    {
+                      "id": "pyobject",
+                      "text": "PyObject",
+                      "level": 2
+                    },
+                    {
+                      "id": "pyobjecthead",
+                      "text": "PyObjectHEAD",
+                      "level": 3
+                    },
+                    {
+                      "id": "common-fields-of-all-datatypes",
+                      "text": "Common Fields of All DataTypes",
+                      "level": 3
+                    },
+                    {
+                      "id": "obrefcnt",
+                      "text": "==obrefcnt==",
+                      "level": 4
+                    },
+                    {
+                      "id": "obtype",
+                      "text": "obtype",
+                      "level": 4
+                    },
+                    {
+                      "id": "types",
+                      "text": "Types",
+                      "level": 2
+                    },
+                    {
+                      "id": "immutable",
+                      "text": "Immutable",
+                      "level": 3
+                    },
+                    {
+                      "id": "mutable",
+                      "text": "Mutable",
+                      "level": 3
+                    },
+                    {
+                      "id": "python-int-pylongobject",
+                      "text": "Python int -- PyLongObject",
+                      "level": 2
+                    },
+                    {
+                      "id": "head",
+                      "text": "HEAD",
+                      "level": 3
+                    },
+                    {
+                      "id": "cpp-vs-py-size-limit",
+                      "text": "Cpp vs Py Size Limit",
+                      "level": 3
+                    },
+                    {
+                      "id": "obsize",
+                      "text": "obsize",
+                      "level": 3
+                    },
+                    {
+                      "id": "obdigit",
+                      "text": "obdigit[]",
+                      "level": 3
+                    },
+                    {
+                      "id": "diff",
+                      "text": "Diff",
+                      "level": 3
+                    },
+                    {
+                      "id": "python-float-pyfloatobject",
+                      "text": "Python float -- PyFloatObject",
+                      "level": 2
+                    },
+                    {
+                      "id": "head-2",
+                      "text": "HEAD",
+                      "level": 3
+                    },
+                    {
+                      "id": "obfval",
+                      "text": "obfval",
+                      "level": 3
+                    },
+                    {
+                      "id": "python-bool-subclass-of-int",
+                      "text": "Python bool -- subclass of int",
+                      "level": 2
+                    },
+                    {
+                      "id": "python-str-pyunicodeobject",
+                      "text": "Python str -- PyUnicodeObject",
+                      "level": 2
+                    },
+                    {
+                      "id": "length",
+                      "text": "length",
+                      "level": 3
+                    },
+                    {
+                      "id": "hash",
+                      "text": "hash",
+                      "level": 3
+                    },
+                    {
+                      "id": "kind",
+                      "text": "kind",
+                      "level": 3
+                    },
+                    {
+                      "id": "interned",
+                      "text": "==interned==",
+                      "level": 3
+                    },
+                    {
+                      "id": "addition",
+                      "text": "Addition",
+                      "level": 2
+                    },
+                    {
+                      "id": "typeconversion",
+                      "text": "TypeConversion",
+                      "level": 1
+                    },
+                    {
+                      "id": "type-conversion-explicit-vs-implicit",
+                      "text": "TYPE CONVERSION -- EXPLICIT vs IMPLICIT",
+                      "level": 2
+                    }
+                  ],
+                  "references": [],
+                  "sha256": "4b1e06e846a6cc5c9cc9cbadb44cf77d65e522e5afb838bf203a0e1b73a1edcf",
+                  "sizeBytes": 21115
+                },
+                {
+                  "id": "e67f79ae71d3d630",
+                  "title": "DataTypesLowLevel 2",
+                  "route": "/notes/basics/intro-and-internal-working/datatypeslowlevel-2",
+                  "sourcePath": "notes/00-Basics/00-Intro-and-Internal-Working/03-DataTypesLowLevel-2.md",
+                  "order": 3,
+                  "date": "2026-08-30",
+                  "time": "19:34:11+05:30",
+                  "headings": [
+                    {
+                      "id": "topics",
+                      "text": "Topics",
+                      "level": 1
+                    },
+                    {
+                      "id": "pyobjects",
+                      "text": "PyObjects",
+                      "level": 1
+                    },
+                    {
+                      "id": "common-fields-of-all-datatypes",
+                      "text": "Common Fields of All DataTypes",
+                      "level": 3
+                    },
+                    {
+                      "id": "obrefcnt",
+                      "text": "obrefcnt",
+                      "level": 4
+                    },
+                    {
+                      "id": "obtype",
+                      "text": "obtype",
+                      "level": 4
+                    },
+                    {
+                      "id": "pythonlist-pylistobject",
+                      "text": "Pythonlist -- PyListObject",
+                      "level": 2
+                    },
+                    {
+                      "id": "obsize",
+                      "text": "obsize",
+                      "level": 3
+                    },
+                    {
+                      "id": "obitem",
+                      "text": "obitem",
+                      "level": 3
+                    },
+                    {
+                      "id": "allocated",
+                      "text": "allocated",
+                      "level": 3
+                    },
+                    {
+                      "id": "python-dict-pydictobject",
+                      "text": "Python dict -- PyDictObject",
+                      "level": 2
+                    },
+                    {
+                      "id": "maused",
+                      "text": "maused",
+                      "level": 3
+                    },
+                    {
+                      "id": "makeys",
+                      "text": "makeys",
+                      "level": 3
+                    },
+                    {
+                      "id": "mavalues",
+                      "text": "mavalues",
+                      "level": 3
+                    },
+                    {
+                      "id": "summary-table",
+                      "text": "Summary Table",
+                      "level": 1
+                    }
+                  ],
+                  "references": [],
+                  "sha256": "8e76927b57b9ca21a0f27ae6a9715237441f59f8b33a51a5dda60dd044e5c8d4",
+                  "sizeBytes": 8157
+                },
+                {
+                  "id": "4307d4fd8cce77e1",
+                  "title": "TypeMetaClass",
+                  "route": "/notes/basics/intro-and-internal-working/typemetaclass",
+                  "sourcePath": "notes/00-Basics/00-Intro-and-Internal-Working/04-TypeMetaClass.md",
+                  "order": 4,
+                  "date": "2026-08-30",
+                  "time": "19:34:11+05:30",
+                  "headings": [
+                    {
+                      "id": "topics",
+                      "text": "Topics",
+                      "level": 1
+                    },
+                    {
+                      "id": "pytypeobject-type",
+                      "text": "PyTypeObject -- type()",
+                      "level": 1
+                    },
+                    {
+                      "id": "type-functions",
+                      "text": "Type Functions",
+                      "level": 2
+                    },
+                    {
+                      "id": "checking-type",
+                      "text": "Checking type:",
+                      "level": 3
+                    },
+                    {
+                      "id": "creating-a-class",
+                      "text": "Creating a class:",
+                      "level": 3
+                    },
+                    {
+                      "id": "type-is-a-metaclass",
+                      "text": "Type is a MetaClass",
+                      "level": 2
+                    },
+                    {
+                      "id": "the-circular-relationship",
+                      "text": "The Circular Relationship",
+                      "level": 3
+                    },
+                    {
+                      "id": "properties-realtionship",
+                      "text": "Properties & Realtionship",
+                      "level": 2
+                    },
+                    {
+                      "id": "the-custom-classes",
+                      "text": "The Custom Classes",
+                      "level": 3
+                    },
+                    {
+                      "id": "int-str-list-other",
+                      "text": "int,str,list & other",
+                      "level": 3
+                    },
+                    {
+                      "id": "creation-inherientence",
+                      "text": "Creation & Inherientence",
+                      "level": 4
+                    },
+                    {
+                      "id": "final",
+                      "text": "Final",
+                      "level": 2
+                    },
+                    {
+                      "id": "what-actually-is-a-type",
+                      "text": "What actually is a type ?",
+                      "level": 3
+                    },
+                    {
+                      "id": "summary",
+                      "text": "Summary",
+                      "level": 3
+                    }
+                  ],
+                  "references": [],
+                  "sha256": "3646691b2ec8ea02745c9bba6a1b9ec727344f3ecd839ad7dd1ffc15c7f0107f",
+                  "sizeBytes": 11901
+                },
+                {
+                  "id": "e5b7b2d11b26644a",
+                  "title": "ClassHierarchy",
+                  "route": "/notes/basics/intro-and-internal-working/classhierarchy",
+                  "sourcePath": "notes/00-Basics/00-Intro-and-Internal-Working/05-ClassHierarchy.md",
+                  "order": 5,
+                  "date": "2026-08-30",
+                  "time": "19:34:11+05:30",
+                  "headings": [
+                    {
+                      "id": "topics",
+                      "text": "Topics",
+                      "level": 1
+                    },
+                    {
+                      "id": "tree",
+                      "text": "Tree",
+                      "level": 1
+                    },
+                    {
+                      "id": "the-absolute-root",
+                      "text": "The Absolute root",
+                      "level": 2
+                    }
+                  ],
+                  "references": [],
+                  "sha256": "525c60b169ad73fb60ba4288bd4485a8ea599ed8f3927d13bf2486f655113284",
+                  "sizeBytes": 7035
+                },
+                {
+                  "id": "8b3fecf93e6be7ed",
+                  "title": "TypeCasting",
+                  "route": "/notes/basics/intro-and-internal-working/typecasting",
+                  "sourcePath": "notes/00-Basics/00-Intro-and-Internal-Working/06-TypeCasting.md",
+                  "order": 6,
+                  "date": "2026-08-30",
+                  "time": "19:34:11+05:30",
+                  "headings": [
+                    {
+                      "id": "typecasting",
+                      "text": "TYPECASTING",
+                      "level": 1
+                    },
+                    {
+                      "id": "implicit-typecasting",
+                      "text": "IMPLICIT TYPECASTING",
+                      "level": 2
+                    },
+                    {
+                      "id": "int-float-float",
+                      "text": "int + float -> float",
+                      "level": 3
+                    },
+                    {
+                      "id": "bool-int-automatically",
+                      "text": "bool -> int automatically",
+                      "level": 3
+                    },
+                    {
+                      "id": "erros",
+                      "text": "Erros",
+                      "level": 3
+                    },
+                    {
+                      "id": "explicit-typecasting",
+                      "text": "EXPLICIT TYPECASTING",
+                      "level": 2
+                    },
+                    {
+                      "id": "int",
+                      "text": "int()",
+                      "level": 3
+                    },
+                    {
+                      "id": "float",
+                      "text": "float()",
+                      "level": 3
+                    },
+                    {
+                      "id": "str",
+                      "text": "str()",
+                      "level": 3
+                    },
+                    {
+                      "id": "bool",
+                      "text": "bool()",
+                      "level": 3
+                    },
+                    {
+                      "id": "list-tuple-set",
+                      "text": "list(), tuple(), set()",
+                      "level": 3
+                    },
+                    {
+                      "id": "dict",
+                      "text": "dict()",
+                      "level": 3
+                    },
+                    {
+                      "id": "chr-and-ord",
+                      "text": "chr() and ord()",
+                      "level": 3
+                    },
+                    {
+                      "id": "bin-oct-hex",
+                      "text": "bin(), oct(), hex()",
+                      "level": 3
+                    },
+                    {
+                      "id": "bytes-and-bytearray",
+                      "text": "bytes() and bytearray()",
+                      "level": 3
+                    },
+                    {
+                      "id": "internally-wroking",
+                      "text": "INTERNALLY Wroking",
+                      "level": 2
+                    },
+                    {
+                      "id": "table",
+                      "text": "Table",
+                      "level": 3
+                    },
+                    {
+                      "id": "cpp-vs-py-typecastings",
+                      "text": "Cpp vs Py TypeCastings",
+                      "level": 2
+                    },
+                    {
+                      "id": "c",
+                      "text": "C++",
+                      "level": 3
+                    },
+                    {
+                      "id": "c-static-cast",
+                      "text": "C++ Static Cast",
+                      "level": 4
+                    },
+                    {
+                      "id": "c-dynamic-cast",
+                      "text": "C++ Dynamic Cast",
+                      "level": 4
+                    },
+                    {
+                      "id": "other-c-casts",
+                      "text": "Other C++ Casts",
+                      "level": 4
+                    },
+                    {
+                      "id": "python",
+                      "text": "Python",
+                      "level": 3
+                    },
+                    {
+                      "id": "static-cast-no",
+                      "text": "Static Cast -- NO",
+                      "level": 4
+                    },
+                    {
+                      "id": "dynamic-cast-always",
+                      "text": "Dynamic Cast -- ALWAYS",
+                      "level": 4
+                    },
+                    {
+                      "id": "not-actuall-casting",
+                      "text": "Not Actuall Casting",
+                      "level": 2
+                    },
+                    {
+                      "id": "1-explicit-conversion-what-python-calls-casting",
+                      "text": "1. EXPLICIT CONVERSION (what Python calls casting)",
+                      "level": 3
+                    },
+                    {
+                      "id": "2-type-checking-isinstance-and-type",
+                      "text": "2. TYPE CHECKING -- isinstance() and type()",
+                      "level": 3
+                    },
+                    {
+                      "id": "3-duck-typing-the-real-python-way",
+                      "text": "3. DUCK TYPING -- THE REAL PYTHON WAY",
+                      "level": 3
+                    },
+                    {
+                      "id": "4-hasattr-checking-capability-not-type",
+                      "text": "4. HASATTR -- CHECKING CAPABILITY NOT TYPE",
+                      "level": 3
+                    },
+                    {
+                      "id": "5-type-hints-python-s-optional-static-like-typing",
+                      "text": "5. TYPE HINTS -- PYTHON'S OPTIONAL STATIC-LIKE TYPING",
+                      "level": 3
+                    },
+                    {
+                      "id": "6-structural-subtyping-protocol-python-3-8",
+                      "text": "6. STRUCTURAL SUBTYPING -- Protocol (Python 3.8+)",
+                      "level": 3
+                    },
+                    {
+                      "id": "summary",
+                      "text": "Summary",
+                      "level": 2
+                    }
+                  ],
+                  "references": [],
+                  "sha256": "1038076b5458c00291859712cd5862eb026ff7391bc0a1dcc6f8696e3ee03191",
+                  "sizeBytes": 30404
+                },
+                {
+                  "id": "e3e1e79f0cfbd1b5",
+                  "title": "ScopeAndSymbolTable 1",
+                  "route": "/notes/basics/intro-and-internal-working/scopeandsymboltable-1",
+                  "sourcePath": "notes/00-Basics/00-Intro-and-Internal-Working/07-ScopeAndSymbolTable-1.md",
+                  "order": 7,
+                  "date": "2026-08-30",
+                  "time": "19:34:11+05:30",
+                  "headings": [
+                    {
+                      "id": "topics",
+                      "text": "Topics",
+                      "level": 1
+                    },
+                    {
+                      "id": "legb",
+                      "text": "LEGB",
+                      "level": 1
+                    },
+                    {
+                      "id": "c-vs-py",
+                      "text": "C++ vs Py",
+                      "level": 2
+                    },
+                    {
+                      "id": "legb-search-order",
+                      "text": "LEGB Search Order",
+                      "level": 2
+                    },
+                    {
+                      "id": "local-order",
+                      "text": "Local Order",
+                      "level": 3
+                    },
+                    {
+                      "id": "global-scope",
+                      "text": "Global Scope",
+                      "level": 3
+                    },
+                    {
+                      "id": "built-in-scope",
+                      "text": "Built in Scope",
+                      "level": 3
+                    },
+                    {
+                      "id": "working",
+                      "text": "Working",
+                      "level": 2
+                    },
+                    {
+                      "id": "local-trap",
+                      "text": "Local trap",
+                      "level": 3
+                    },
+                    {
+                      "id": "the-global-keyword",
+                      "text": "The global Keyword",
+                      "level": 3
+                    },
+                    {
+                      "id": "the-enclosing-scope",
+                      "text": "The Enclosing Scope",
+                      "level": 3
+                    },
+                    {
+                      "id": "nonlocal-writes-through-the-cell",
+                      "text": "nonlocal -- Writes Through the Cell",
+                      "level": 3
+                    }
+                  ],
+                  "references": [],
+                  "sha256": "a99c8ccbc56af58b2f28eb8a0648c6638d91155badff6f80879dc579f6a62de1",
+                  "sizeBytes": 11278
+                },
+                {
+                  "id": "120b51e83a398720",
+                  "title": "ScopeAndSymbolTable 2",
+                  "route": "/notes/basics/intro-and-internal-working/scopeandsymboltable-2",
+                  "sourcePath": "notes/00-Basics/00-Intro-and-Internal-Working/08-ScopeAndSymbolTable-2.md",
+                  "order": 8,
+                  "date": "2026-08-30",
+                  "time": "19:34:11+05:30",
+                  "headings": [
+                    {
+                      "id": "cpp-vs-py-addresss",
+                      "text": "Cpp vs Py Addresss",
+                      "level": 1
+                    },
+                    {
+                      "id": "queries",
+                      "text": "Queries",
+                      "level": 2
+                    },
+                    {
+                      "id": "global",
+                      "text": "global",
+                      "level": 3
+                    },
+                    {
+                      "id": "nonlocal",
+                      "text": "nonlocal",
+                      "level": 3
+                    },
+                    {
+                      "id": "overloading",
+                      "text": "overloading",
+                      "level": 3
+                    },
+                    {
+                      "id": "shadowing",
+                      "text": "shadowing",
+                      "level": 3
+                    },
+                    {
+                      "id": "overwriting",
+                      "text": "overwriting",
+                      "level": 3
+                    },
+                    {
+                      "id": "pycellobject",
+                      "text": "PyCellObject",
+                      "level": 3
+                    },
+                    {
+                      "id": "full-summary",
+                      "text": "Full Summary",
+                      "level": 2
+                    }
+                  ],
+                  "references": [],
+                  "sha256": "40bbf6d44bb3ed535ec016523a60ce31d48150d3b996202c95c6a4710aa631b6",
+                  "sizeBytes": 17880
+                },
+                {
+                  "id": "4d299491db6fbc86",
+                  "title": "NamingConventions",
+                  "route": "/notes/basics/intro-and-internal-working/namingconventions",
+                  "sourcePath": "notes/00-Basics/00-Intro-and-Internal-Working/09-NamingConventions.md",
+                  "order": 9,
+                  "date": "2026-08-30",
+                  "time": "19:34:11+05:30",
+                  "headings": [
+                    {
+                      "id": "topic",
+                      "text": "Topic",
+                      "level": 1
+                    },
+                    {
+                      "id": "hard-rules",
+                      "text": "Hard Rules",
+                      "level": 1
+                    },
+                    {
+                      "id": "valids",
+                      "text": "Valids",
+                      "level": 3
+                    },
+                    {
+                      "id": "unicode-is-valid",
+                      "text": "Unicode Is Valid",
+                      "level": 3
+                    },
+                    {
+                      "id": "keywords",
+                      "text": "Keywords",
+                      "level": 2
+                    },
+                    {
+                      "id": "hard-keywords",
+                      "text": "Hard KeyWords",
+                      "level": 3
+                    },
+                    {
+                      "id": "soft-keywords",
+                      "text": "Soft Keywords",
+                      "level": 3
+                    },
+                    {
+                      "id": "naming-conventions-pep-8",
+                      "text": "NAMING CONVENTIONS (PEP 8)",
+                      "level": 1
+                    },
+                    {
+                      "id": "variables-and-functions",
+                      "text": "Variables and Functions",
+                      "level": 3
+                    },
+                    {
+                      "id": "constants",
+                      "text": "Constants",
+                      "level": 3
+                    },
+                    {
+                      "id": "classes",
+                      "text": "Classes",
+                      "level": 3
+                    },
+                    {
+                      "id": "private-and-special-names",
+                      "text": "Private and Special Names",
+                      "level": 3
+                    },
+                    {
+                      "id": "single-leading-underscore-name",
+                      "text": "Single Leading Underscore -- name",
+                      "level": 4
+                    },
+                    {
+                      "id": "double-leading-underscore-name-name-mangling",
+                      "text": "Double Leading Underscore -- name (Name Mangling)",
+                      "level": 4
+                    },
+                    {
+                      "id": "double-leading-and-trailing-underscore-name-dunder",
+                      "text": "Double Leading AND Trailing Underscore -- name (Dunder)",
+                      "level": 4
+                    },
+                    {
+                      "id": "single-underscore-alone",
+                      "text": "Single Underscore Alone --",
+                      "level": 4
+                    },
+                    {
+                      "id": "type-hint-conventions-modern-python",
+                      "text": "Type Hint Conventions (modern Python)",
+                      "level": 3
+                    },
+                    {
+                      "id": "internally-variable-names",
+                      "text": "INTERNALLY Variable NAMES",
+                      "level": 2
+                    },
+                    {
+                      "id": "names-are-dictionary-keys",
+                      "text": "Names Are Dictionary Keys",
+                      "level": 3
+                    },
+                    {
+                      "id": "the-name-binding-operations",
+                      "text": "The Name Binding Operations",
+                      "level": 3
+                    },
+                    {
+                      "id": "deletion",
+                      "text": "Deletion",
+                      "level": 3
+                    },
+                    {
+                      "id": "name-resolution-at-bytecode-level",
+                      "text": "Name Resolution at Bytecode Level",
+                      "level": 3
+                    }
+                  ],
+                  "references": [],
+                  "sha256": "8606d7f22ea47f72aa9c14747354e1cb0860139741c87a872183b8dd0166ef8a",
+                  "sizeBytes": 12349
+                },
+                {
+                  "id": "c1ab5fce11d892bb",
+                  "title": "UnderscoreAsThrowAway",
+                  "route": "/notes/basics/intro-and-internal-working/underscoreasthrowaway",
+                  "sourcePath": "notes/00-Basics/00-Intro-and-Internal-Working/10-UnderscoreAsThrowAway.md",
+                  "order": 10,
+                  "date": "2026-08-30",
+                  "time": "19:34:11+05:30",
+                  "headings": [
+                    {
+                      "id": "throwaway-and-dunder-methods",
+                      "text": "THROWAWAY  AND DUNDER METHODS",
+                      "level": 1
+                    },
+                    {
+                      "id": "as-throwaway",
+                      "text": "AS THROWAWAY",
+                      "level": 1
+                    },
+                    {
+                      "id": "idea",
+                      "text": "Idea",
+                      "level": 2
+                    },
+                    {
+                      "id": "in-loops",
+                      "text": "In Loops",
+                      "level": 2
+                    },
+                    {
+                      "id": "in-unpacking",
+                      "text": "In Unpacking",
+                      "level": 2
+                    },
+                    {
+                      "id": "extended-unpacking-with",
+                      "text": "Extended Unpacking With",
+                      "level": 2
+                    },
+                    {
+                      "id": "in-nested-unpacking",
+                      "text": "In Nested Unpacking",
+                      "level": 2
+                    },
+                    {
+                      "id": "multiple-in-same-line",
+                      "text": "Multiple  In Same Line",
+                      "level": 2
+                    },
+                    {
+                      "id": "in-repl-special-behavior",
+                      "text": "In REPL -- Special Behavior",
+                      "level": 2
+                    },
+                    {
+                      "id": "in-internationalisation-i18n",
+                      "text": "In Internationalisation (i18n)",
+                      "level": 2
+                    }
+                  ],
+                  "references": [],
+                  "sha256": "ed9a559f137ecffaa7799f3fcc7ec3309aabb8787c8bfd35890efda53658ce04",
+                  "sizeBytes": 4504
+                },
+                {
+                  "id": "7a2761e63b266d58",
+                  "title": "DunderMethods 1",
+                  "route": "/notes/basics/intro-and-internal-working/dundermethods-1",
+                  "sourcePath": "notes/00-Basics/00-Intro-and-Internal-Working/11-DunderMethods-1.md",
+                  "order": 11,
+                  "date": "2026-08-30",
+                  "time": "19:34:11+05:30",
+                  "headings": [
+                    {
+                      "id": "dunder-methods",
+                      "text": "DUNDER METHODS",
+                      "level": 1
+                    },
+                    {
+                      "id": "are-they-predefined",
+                      "text": "Are They Predefined",
+                      "level": 2
+                    },
+                    {
+                      "id": "every-class-already-has-dunders-from-object",
+                      "text": "Every Class Already Has Dunders From object",
+                      "level": 2
+                    },
+                    {
+                      "id": "overriding-replacing-default-behavior",
+                      "text": "Overriding -- Replacing Default Behavior",
+                      "level": 2
+                    },
+                    {
+                      "id": "defining-custom-dunders-make-your-class-behave-like-built-ins",
+                      "text": "Defining Custom Dunders -- Make Your Class Behave Like Built-ins",
+                      "level": 2
+                    },
+                    {
+                      "id": "context-manager-dunders",
+                      "text": "Context Manager Dunders",
+                      "level": 2
+                    },
+                    {
+                      "id": "callable-dunders",
+                      "text": "Callable Dunders",
+                      "level": 2
+                    },
+                    {
+                      "id": "comparison-dunders",
+                      "text": "Comparison Dunders",
+                      "level": 2
+                    },
+                    {
+                      "id": "container-dunders",
+                      "text": "Container Dunders",
+                      "level": 2
+                    },
+                    {
+                      "id": "attribute-access-dunders",
+                      "text": "Attribute Access Dunders",
+                      "level": 2
+                    },
+                    {
+                      "id": "numeric-dunders-full-set",
+                      "text": "Numeric Dunders -- Full Set",
+                      "level": 2
+                    },
+                    {
+                      "id": "the-full-dunder-reference",
+                      "text": "The Full Dunder Reference",
+                      "level": 2
+                    },
+                    {
+                      "id": "why-not-create-custom-dunders",
+                      "text": "WHY NOT CREATE CUSTOM DUNDERS",
+                      "level": 2
+                    },
+                    {
+                      "id": "reason-1-future-collision",
+                      "text": "Reason 1 -- Future Collision",
+                      "level": 3
+                    },
+                    {
+                      "id": "reason-2-false-signal",
+                      "text": "Reason 2 -- False Signal",
+                      "level": 3
+                    },
+                    {
+                      "id": "reason-3-no-benefit",
+                      "text": "Reason 3 -- No Benefit",
+                      "level": 3
+                    },
+                    {
+                      "id": "the-precise-rule",
+                      "text": "THE PRECISE RULE",
+                      "level": 2
+                    },
+                    {
+                      "id": "the-c-parallel-is-exact",
+                      "text": "THE C++ PARALLEL IS EXACT",
+                      "level": 2
+                    }
+                  ],
+                  "references": [],
+                  "sha256": "747de06140a97ec03c4850f7210d8325ec791084052017728d82ab9798f3ac1f",
+                  "sizeBytes": 15364
+                },
+                {
+                  "id": "fc061c25da8e516d",
+                  "title": "NoneType",
+                  "route": "/notes/basics/intro-and-internal-working/nonetype",
+                  "sourcePath": "notes/00-Basics/00-Intro-and-Internal-Working/12-NoneType.md",
+                  "order": 12,
+                  "date": "2026-08-30",
+                  "time": "19:34:11+05:30",
+                  "headings": [
+                    {
+                      "id": "nonetype",
+                      "text": "NoneType",
+                      "level": 1
+                    },
+                    {
+                      "id": "summary",
+                      "text": "Summary",
+                      "level": 2
+                    },
+                    {
+                      "id": "storage-of-none-true-false",
+                      "text": "Storage of None/True/False",
+                      "level": 1
+                    },
+                    {
+                      "id": "properties-of-true-false-none",
+                      "text": "Properties of True/False/None",
+                      "level": 1
+                    },
+                    {
+                      "id": "storage",
+                      "text": "Storage",
+                      "level": 2
+                    },
+                    {
+                      "id": "singleton",
+                      "text": "Singleton",
+                      "level": 2
+                    },
+                    {
+                      "id": "refcount",
+                      "text": "refcount",
+                      "level": 2
+                    },
+                    {
+                      "id": "summary-2",
+                      "text": "Summary",
+                      "level": 2
+                    },
+                    {
+                      "id": "others-like-true-false-none",
+                      "text": "Others like True/False/None",
+                      "level": 1
+                    },
+                    {
+                      "id": "empty-tuple-byte-string-frozenset-objects",
+                      "text": "Empty tuple,byte,string,frozenset objects",
+                      "level": 2
+                    },
+                    {
+                      "id": "single-ascci-char-0-127",
+                      "text": "Single ASCCI char (0-127)",
+                      "level": 2
+                    },
+                    {
+                      "id": "every-type-object",
+                      "text": "every type object",
+                      "level": 2
+                    },
+                    {
+                      "id": "ellipsis-object",
+                      "text": "Ellipsis object ...",
+                      "level": 2
+                    },
+                    {
+                      "id": "notimplemented",
+                      "text": "NotImplemented",
+                      "level": 2
+                    },
+                    {
+                      "id": "small-bytes-objects-0-255-single-byte",
+                      "text": "Small bytes objects (0-255 single byte)",
+                      "level": 2
+                    },
+                    {
+                      "id": "all",
+                      "text": "All",
+                      "level": 2
+                    }
+                  ],
+                  "references": [],
+                  "sha256": "83c776abdd2771178ab4c602543136c4f041862f69bafc48845f4771e83573a3",
+                  "sizeBytes": 10450
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   },
   "stats": {
-    "topics": 0,
-    "subtopics": 0,
-    "notes": 0,
+    "topics": 1,
+    "subtopics": 1,
+    "notes": 13,
     "referenceFiles": 0
   }
 }

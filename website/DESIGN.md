@@ -1259,10 +1259,12 @@ with this document, this final rule set wins:
 - Donate is present in navbar, main content, footer, and final Links-dropdown row
 - final Links-dropdown row is the UPI donation row and opens a slide-down QR panel on hover/focus
 - UPI QR uses exactly `upi://pay?pa=notdgx@upi&pn=notdgx&cu=INR`
-- footer uses the exact supplied Predictive Arc scene plus a black bottom vignette
+- hero uses the Ribbon Field WebGL animation with synchronized slow hue cycling
+- footer uses the Emerald Horizon Three.js animation with synchronized hue cycling and **vignette = 0 (zero vignette)**
 - footer text uses subtle black shadow for readability
 - no decorative sliders or fake slider rails; any real range control uses the theme-matched grayscale treatment
 - no unrelated pre-default product/company display
 - no hard chromatic accent blocks; blend tonal differences using grayscale gradients
 - Escape, arrows, Tab, Enter, Space, Home/End, and normal form/search navigation work wherever applicable, without any visible shortcut indicators
+
 

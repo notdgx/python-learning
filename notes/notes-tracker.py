@@ -35,7 +35,7 @@ HEADING_RE = re.compile(r"^(#{1,6})[ \t]+(.+?)[ \t]*#*[ \t]*$", re.MULTILINE)
 REF_RE = re.compile(r"^(?P<order>\d+)-reference-file-(?P<index>\d+)\.py$", re.IGNORECASE)
 SAFE_SLUG_RE = re.compile(r"[^a-z0-9]+")
 DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
-TIME_RE = re.compile(r"^\d{2}:\d{2}:\d{2}(?:[+-]\d{2}:\d{2}|Z)?$")
+TIME_RE = re.compile(r"^\d{2}:\d{2}:\d{2}(?:[+-]\d{2}:?\d{2}|Z)?$")
 
 GENERATED_NAMES = {"index.md", "metadata.json", "notes-tracker.py"}
 IGNORED_DIRS = {"archive", ".git", "__pycache__", "node_modules"}
@@ -193,6 +193,9 @@ def normalize_time(value: Any, default: str) -> str:
         raise TrackerError(
             f"Invalid frontmatter time '{value}'. Expected HH:MM:SS, optionally with timezone offset."
         )
+    # Normalize +HHMM or -HHMM to +HH:MM / -HH:MM
+    if len(text) == 13 and (text[8] == "+" or text[8] == "-"):
+        text = text[:11] + ":" + text[11:]
     return text
 
 
@@ -213,9 +216,10 @@ def normalize_note(path: Path, *, touch_missing_only: bool = True) -> tuple[str,
     current = now_local()
 
     date_default = current.date().isoformat()
-    time_default = current.strftime("%H:%M:%S%z")
-    if len(time_default) == 9:  # +HHMM -> +HH:MM
-        time_default = time_default[:-2] + ":" + time_default[-2:]
+    z = current.strftime("%z")
+    if z and len(z) == 5:
+        z = z[:3] + ":" + z[3:]
+    time_default = current.strftime("%H:%M:%S") + z
 
     date_value = normalize_date(data.get("date"), date_default)
     time_value = normalize_time(data.get("time"), time_default)
@@ -456,7 +460,7 @@ def generate_index(root: Path, notes: tuple[Note, ...]) -> str:
     groups: dict[str, dict[str, list[Note]]] = {}
     for note in notes:
         rel = Path(note.sourcePath)
-        topic, subtopic, _ = rel.parts
+        topic, subtopic, _ = rel.parts[-3:]
         groups.setdefault(topic, {}).setdefault(subtopic, []).append(note)
 
     lines = ["# Python Learning", "", ""]
@@ -476,7 +480,7 @@ def build_metadata(root: Path, notes: tuple[Note, ...], generated_at: str) -> di
     topics: dict[str, dict[str, Any]] = {}
     for note in notes:
         rel = Path(note.sourcePath)
-        topic_dir, subtopic_dir, _ = rel.parts
+        topic_dir, subtopic_dir, _ = rel.parts[-3:]
         topic = topics.setdefault(
             topic_dir,
             {

@@ -1073,3 +1073,30 @@ Practice/projects behavior is intentionally deferred.
 When in doubt:
 
 > Preserve the repository's content, keep the website statically buildable, derive website state from source content, obey `ARCHITECTURE.md` and `DESIGN.md`, and wait for explicit user approval before committing website changes.
+
+---
+
+# 53. Build & Operational Commands
+
+Always use these standard commands:
+
+```bash
+# Normalize and synchronize note metadata (from repo root)
+python3 notes/notes-tracker.py normalize
+
+# Check metadata integrity (from repo root)
+python3 notes/notes-tracker.py check
+
+# Build static production bundle into website/dist/
+cd website && npm run build
+
+# Preview static build locally
+cd website && npm run preview
+```
+
+### Authoritative Animation Invariants:
+1. Hero: Ribbon Field WebGL (`RibbonFieldBackground`) with continuous slow hue cycling and pointer drift.
+2. Footer: Emerald Horizon Three.js (`EmeraldHorizonBackground`) with synchronized hue cycling and **`vignette = 0` (zero vignette rule)**.
+3. Both animations preserve aspect ratio (`object-fit: cover` logic with crop, never stretching/distorting).
+
+

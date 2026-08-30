@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-08-30T12:57:05+00:00",
+  "contentRoot": "notes",
+  "sections": {
+    "notes": {
+      "id": "notes",
+      "title": "Python Learning",
+      "topics": []
+    }
+  },
+  "stats": {
+    "topics": 0,
+    "subtopics": 0,
+    "notes": 0,
+    "referenceFiles": 0
+  }
+}

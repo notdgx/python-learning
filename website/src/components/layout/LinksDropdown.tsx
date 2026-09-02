@@ -6,7 +6,6 @@ import {
   XLogo,
   GithubLogo,
   ArrowSquareOut,
-  CurrencyInr,
   QrCode,
   Copy,
   Check,
@@ -262,7 +261,7 @@ export const LinksDropdown: React.FC<LinksDropdownProps> = () => {
               aria-controls="upi-slide-down-panel"
             >
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--color-ink)', fontSize: '13.5px', fontWeight: 600 }}>
-                <CurrencyInr size={18} weight="bold" />
+                <QrCode size={18} />
                 <span>Donate via UPI</span>
               </div>
               <span

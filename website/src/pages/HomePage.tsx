@@ -14,18 +14,18 @@ export const HomePage: React.FC<HomePageProps> = ({ heroHue = 0 }) => {
   const stats = getStats();
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
-      {/* 1. HERO SECTION with RibbonField WebGL (16:9 Aspect Ratio) */}
+    <div style={{ display: 'flex', flexDirection: 'column', width: '100%', overflowX: 'hidden' }}>
+      {/* 1. HERO SECTION with RibbonField WebGL */}
       <section
+        className="home-hero-section"
         style={{
           position: 'relative',
           width: '100%',
-          aspectRatio: '16 / 9',
-          minHeight: 'clamp(480px, 56.25vw, 680px)',
+          minHeight: 'clamp(440px, 50vw, 680px)',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          padding: '48px 24px',
+          padding: 'clamp(48px, 8vw, 72px) 16px',
           borderBottom: '1px solid var(--color-hairline)',
           overflow: 'hidden',
           backgroundColor: 'var(--color-canvas)'
@@ -43,7 +43,7 @@ export const HomePage: React.FC<HomePageProps> = ({ heroHue = 0 }) => {
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-            gap: '20px'
+            gap: '18px'
           }}
         >
           {/* Badge */}
@@ -52,18 +52,21 @@ export const HomePage: React.FC<HomePageProps> = ({ heroHue = 0 }) => {
               display: 'inline-flex',
               alignItems: 'center',
               gap: '6px',
-              padding: '4px 12px',
+              padding: '5px 12px',
               backgroundColor: 'rgba(255, 255, 255, 0.06)',
               border: '1px solid var(--color-hairline-strong)',
               borderRadius: 'var(--radius-full)',
               fontSize: '12px',
               fontWeight: 500,
               color: 'var(--color-ink)',
-              backdropFilter: 'blur(8px)'
+              backdropFilter: 'blur(8px)',
+              maxWidth: '100%'
             }}
           >
-            <CheckCircle size={14} color="#4ade80" />
-            <span>Structured Python 3.12+ Knowledge Base</span>
+            <CheckCircle size={14} color="#4ade80" style={{ flexShrink: 0 }} />
+            <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+              Structured Python 3.12+ Knowledge Base
+            </span>
           </div>
 
           {/* Title */}
@@ -72,7 +75,7 @@ export const HomePage: React.FC<HomePageProps> = ({ heroHue = 0 }) => {
               fontFamily: 'var(--font-serif)',
               fontStyle: 'italic',
               fontWeight: 700,
-              fontSize: 'clamp(2.5rem, 5vw, 3.75rem)',
+              fontSize: 'clamp(2.1rem, 6.5vw, 3.75rem)',
               color: 'var(--color-on-dark)',
               lineHeight: 1.1,
               letterSpacing: '-0.02em',
@@ -85,7 +88,7 @@ export const HomePage: React.FC<HomePageProps> = ({ heroHue = 0 }) => {
           {/* Subtitle */}
           <p
             style={{
-              fontSize: 'clamp(1rem, 2vw, 1.15rem)',
+              fontSize: 'clamp(0.95rem, 3.5vw, 1.15rem)',
               color: 'var(--color-body)',
               lineHeight: 1.6,
               maxWidth: '620px',
@@ -96,8 +99,8 @@ export const HomePage: React.FC<HomePageProps> = ({ heroHue = 0 }) => {
           </p>
 
           {/* CTAs */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '14px', marginTop: '12px', flexWrap: 'wrap', justifyContent: 'center' }}>
-            <Link to="/notes" className="btn-primary" style={{ height: '42px', padding: '0 22px', fontSize: '15px' }}>
+          <div className="hero-cta-group" style={{ display: 'flex', alignItems: 'center', gap: '12px', marginTop: '8px', flexWrap: 'wrap', justifyContent: 'center', width: '100%', maxWidth: '400px' }}>
+            <Link to="/notes" className="btn-primary hero-btn" style={{ height: '42px', padding: '0 22px', fontSize: '14.5px' }}>
               <span>Explore Notes</span>
               <ArrowRight size={16} />
             </Link>
@@ -105,8 +108,8 @@ export const HomePage: React.FC<HomePageProps> = ({ heroHue = 0 }) => {
               href="https://github.com/notdgx/python-learning"
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-secondary"
-              style={{ height: '42px', padding: '0 20px', fontSize: '15px' }}
+              className="btn-secondary hero-btn"
+              style={{ height: '42px', padding: '0 20px', fontSize: '14.5px' }}
             >
               <span>View on GitHub</span>
               <Star size={16} />
@@ -118,47 +121,49 @@ export const HomePage: React.FC<HomePageProps> = ({ heroHue = 0 }) => {
             style={{
               display: 'flex',
               alignItems: 'center',
-              gap: '32px',
-              marginTop: '24px',
-              paddingTop: '20px',
+              justifyContent: 'center',
+              gap: '24px',
+              marginTop: '16px',
+              paddingTop: '16px',
               borderTop: '1px solid var(--color-hairline-soft)',
               color: 'var(--color-mute)',
-              fontSize: '13px'
+              fontSize: '13px',
+              flexWrap: 'wrap'
             }}
           >
             <div>
-              <strong style={{ color: 'var(--color-ink)', fontSize: '16px' }}>{stats.notes}</strong> Active Notes
+              <strong style={{ color: 'var(--color-ink)', fontSize: '15px' }}>{stats.notes}</strong> Active Notes
             </div>
             <div>
-              <strong style={{ color: 'var(--color-ink)', fontSize: '16px' }}>{stats.subtopics}</strong> Subtopics
+              <strong style={{ color: 'var(--color-ink)', fontSize: '15px' }}>{stats.subtopics}</strong> Subtopics
             </div>
           </div>
         </div>
       </section>
 
       {/* 2. LEARNING MODULES / TOPICS */}
-      <section style={{ maxWidth: 'var(--max-content-width)', margin: '0 auto', padding: '72px 24px', width: '100%' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '32px', flexWrap: 'wrap', gap: '16px' }}>
+      <section style={{ maxWidth: 'var(--max-content-width)', margin: '0 auto', padding: 'clamp(48px, 6vw, 72px) clamp(16px, 3vw, 24px)', width: '100%' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '28px', flexWrap: 'wrap', gap: '12px' }}>
           <div>
             <span style={{ fontSize: '12px', fontWeight: 600, color: 'var(--color-mute)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
               Curriculum Overview
             </span>
-            <h2 style={{ fontSize: '1.85rem', color: 'var(--color-ink)', marginTop: '4px' }}>
+            <h2 style={{ fontSize: 'clamp(1.5rem, 4vw, 1.85rem)', color: 'var(--color-ink)', marginTop: '4px' }}>
               Structured Learning Topics
             </h2>
           </div>
-          <Link to="/notes" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', fontSize: '14px', color: 'var(--color-ink)' }}>
+          <Link to="/notes" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', fontSize: '13.5px', color: 'var(--color-ink)' }}>
             <span>Browse complete roadmap</span>
             <ArrowRight size={14} />
           </Link>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '20px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(270px, 1fr))', gap: '16px' }}>
           {topics.map((topic) => (
             <div
               key={topic.id}
               className="surface-card"
-              style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', gap: '20px' }}
+              style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', gap: '18px', padding: '20px' }}
             >
               <div>
                 <div
@@ -207,34 +212,34 @@ export const HomePage: React.FC<HomePageProps> = ({ heroHue = 0 }) => {
       </section>
 
       {/* 3. PROJECTS & PRACTICE PREVIEW */}
-      <section style={{ backgroundColor: 'var(--color-surface)', borderTop: '1px solid var(--color-hairline)', borderBottom: '1px solid var(--color-hairline)', padding: '72px 24px' }}>
+      <section style={{ backgroundColor: 'var(--color-surface)', borderTop: '1px solid var(--color-hairline)', borderBottom: '1px solid var(--color-hairline)', padding: 'clamp(48px, 6vw, 72px) clamp(16px, 3vw, 24px)' }}>
         <div style={{ maxWidth: 'var(--max-content-width)', margin: '0 auto' }}>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '32px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(270px, 1fr))', gap: '24px' }}>
             {/* Projects Box */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
               <div style={{ width: '36px', height: '36px', borderRadius: 'var(--radius-md)', backgroundColor: 'var(--color-surface-elevated)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-ink)' }}>
                 <Code size={20} />
               </div>
-              <h3 style={{ fontSize: '1.3rem', color: 'var(--color-ink)' }}>Hands-on Projects</h3>
-              <p style={{ fontSize: '14px', color: 'var(--color-mute)', lineHeight: 1.6 }}>
+              <h3 style={{ fontSize: '1.25rem', color: 'var(--color-ink)' }}>Hands-on Projects</h3>
+              <p style={{ fontSize: '13.5px', color: 'var(--color-mute)', lineHeight: 1.6 }}>
                 Real-world scripts, CLI utilities, and architectural implementations designed to apply core Python theory in production environments.
               </p>
-              <Link to="/projects" className="btn-secondary" style={{ width: 'fit-content', marginTop: '8px' }}>
+              <Link to="/projects" className="btn-secondary" style={{ width: 'fit-content', marginTop: '6px' }}>
                 <span>View Projects</span>
                 <ArrowRight size={14} />
               </Link>
             </div>
 
             {/* Practice Box */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
               <div style={{ width: '36px', height: '36px', borderRadius: 'var(--radius-md)', backgroundColor: 'var(--color-surface-elevated)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-ink)' }}>
                 <Lightbulb size={20} />
               </div>
-              <h3 style={{ fontSize: '1.3rem', color: 'var(--color-ink)' }}>Interview & Practice Questions</h3>
-              <p style={{ fontSize: '14px', color: 'var(--color-mute)', lineHeight: 1.6 }}>
+              <h3 style={{ fontSize: '1.25rem', color: 'var(--color-ink)' }}>Interview & Practice Questions</h3>
+              <p style={{ fontSize: '13.5px', color: 'var(--color-mute)', lineHeight: 1.6 }}>
                 Curated technical questions, intermediate-to-advanced challenges, and annotated solution walkthroughs.
               </p>
-              <Link to="/practice" className="btn-secondary" style={{ width: 'fit-content', marginTop: '8px' }}>
+              <Link to="/practice" className="btn-secondary" style={{ width: 'fit-content', marginTop: '6px' }}>
                 <span>Explore Practice</span>
                 <ArrowRight size={14} />
               </Link>
@@ -244,26 +249,26 @@ export const HomePage: React.FC<HomePageProps> = ({ heroHue = 0 }) => {
       </section>
 
       {/* 4. CURATED RESOURCES PREVIEW */}
-      <section style={{ maxWidth: 'var(--max-content-width)', margin: '0 auto', padding: '72px 24px', width: '100%' }}>
-        <div style={{ textAlign: 'center', maxWidth: '600px', margin: '0 auto 40px' }}>
+      <section style={{ maxWidth: 'var(--max-content-width)', margin: '0 auto', padding: 'clamp(48px, 6vw, 72px) clamp(16px, 3vw, 24px)', width: '100%' }}>
+        <div style={{ textAlign: 'center', maxWidth: '600px', margin: '0 auto 32px' }}>
           <span style={{ fontSize: '12px', fontWeight: 600, color: 'var(--color-mute)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
             Ecosystem
           </span>
-          <h2 style={{ fontSize: '1.85rem', color: 'var(--color-ink)', marginTop: '4px', marginBottom: '8px' }}>
+          <h2 style={{ fontSize: 'clamp(1.5rem, 4vw, 1.85rem)', color: 'var(--color-ink)', marginTop: '4px', marginBottom: '8px' }}>
             External Resources & Links
           </h2>
-          <p style={{ fontSize: '14px', color: 'var(--color-mute)' }}>
+          <p style={{ fontSize: '13.5px', color: 'var(--color-mute)' }}>
             Curated channels, official documentation, social accounts, and repository tools.
           </p>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '16px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '14px' }}>
           <a
             href="https://docs.python.org/3/"
             target="_blank"
             rel="noopener noreferrer"
             className="surface-card"
-            style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '16px 20px' }}
+            style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '16px 18px' }}
           >
             <div>
               <h4 style={{ fontSize: '14px', color: 'var(--color-ink)' }}>Official Python Docs</h4>
@@ -277,7 +282,7 @@ export const HomePage: React.FC<HomePageProps> = ({ heroHue = 0 }) => {
             target="_blank"
             rel="noopener noreferrer"
             className="surface-card"
-            style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '16px 20px' }}
+            style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '16px 18px' }}
           >
             <div>
               <h4 style={{ fontSize: '14px', color: 'var(--color-ink)' }}>notdgx GitHub</h4>
@@ -291,7 +296,7 @@ export const HomePage: React.FC<HomePageProps> = ({ heroHue = 0 }) => {
             target="_blank"
             rel="noopener noreferrer"
             className="surface-card"
-            style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '16px 20px' }}
+            style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '16px 18px' }}
           >
             <div>
               <h4 style={{ fontSize: '14px', color: 'var(--color-ink)' }}>notdgx YouTube</h4>
@@ -301,6 +306,22 @@ export const HomePage: React.FC<HomePageProps> = ({ heroHue = 0 }) => {
           </a>
         </div>
       </section>
+
+      <style>{`
+        @media (min-width: 768px) {
+          .home-hero-section {
+            aspect-ratio: 16 / 9 !important;
+          }
+        }
+        @media (max-width: 480px) {
+          .hero-cta-group {
+            flex-direction: column !important;
+          }
+          .hero-btn {
+            width: 100% !important;
+          }
+        }
+      `}</style>
     </div>
   );
 };

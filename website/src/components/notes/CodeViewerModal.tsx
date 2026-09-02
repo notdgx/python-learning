@@ -62,10 +62,10 @@ export const CodeViewerModal: React.FC<CodeViewerModalProps> = ({
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        padding: '1.5rem',
-        backgroundColor: 'rgba(0, 0, 0, 0.8)',
-        backdropFilter: 'blur(10px)',
-        WebkitBackdropFilter: 'blur(10px)'
+        padding: '12px',
+        backgroundColor: 'rgba(0, 0, 0, 0.85)',
+        backdropFilter: 'blur(12px)',
+        WebkitBackdropFilter: 'blur(12px)'
       }}
       onClick={(e) => {
         if (e.target === e.currentTarget) onClose();
@@ -78,11 +78,11 @@ export const CodeViewerModal: React.FC<CodeViewerModalProps> = ({
         style={{
           width: '100%',
           maxWidth: '860px',
-          maxHeight: '85vh',
+          maxHeight: '88vh',
           backgroundColor: 'var(--color-surface)',
           border: '1px solid var(--color-hairline-strong)',
           borderRadius: 'var(--radius-lg)',
-          boxShadow: '0 24px 48px rgba(0, 0, 0, 0.85)',
+          boxShadow: '0 24px 48px rgba(0, 0, 0, 0.95)',
           display: 'flex',
           flexDirection: 'column',
           overflow: 'hidden'
@@ -94,40 +94,41 @@ export const CodeViewerModal: React.FC<CodeViewerModalProps> = ({
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
-            padding: '12px 18px',
+            padding: '10px 14px',
             backgroundColor: 'var(--color-surface-elevated)',
-            borderBottom: '1px solid var(--color-hairline)'
+            borderBottom: '1px solid var(--color-hairline)',
+            gap: '8px'
           }}
         >
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <FileCode size={18} color="var(--color-mute)" />
-            <span id="code-viewer-title" style={{ fontFamily: 'var(--font-mono)', fontSize: '14px', fontWeight: 600, color: 'var(--color-ink)' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', minWidth: 0 }}>
+            <FileCode size={18} color="var(--color-mute)" style={{ flexShrink: 0 }} />
+            <span id="code-viewer-title" style={{ fontFamily: 'var(--font-mono)', fontSize: '13px', fontWeight: 600, color: 'var(--color-ink)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
               {filename}
             </span>
           </div>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', flexShrink: 0 }}>
             {/* Copy Button */}
             <button
               onClick={handleCopy}
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
-                gap: '6px',
-                padding: '5px 10px',
+                gap: '5px',
+                padding: '5px 9px',
                 backgroundColor: copied ? 'rgba(34, 197, 94, 0.15)' : 'var(--color-surface-card)',
                 color: copied ? '#4ade80' : 'var(--color-ink)',
                 border: '1px solid var(--color-hairline)',
                 borderRadius: 'var(--radius-xs)',
-                fontSize: '12px',
+                fontSize: '11.5px',
                 fontWeight: 500,
                 cursor: 'pointer',
                 transition: 'all 0.15s ease'
               }}
               aria-label="Copy code"
             >
-              {copied ? <Check size={14} /> : <Copy size={14} />}
-              <span>{copied ? 'Copied!' : 'Copy'}</span>
+              {copied ? <Check size={13} /> : <Copy size={13} />}
+              <span className="code-action-label">{copied ? 'Copied!' : 'Copy'}</span>
             </button>
 
             {/* Download Button */}
@@ -136,21 +137,21 @@ export const CodeViewerModal: React.FC<CodeViewerModalProps> = ({
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
-                gap: '6px',
-                padding: '5px 10px',
+                gap: '5px',
+                padding: '5px 9px',
                 backgroundColor: 'var(--color-surface-card)',
                 color: 'var(--color-ink)',
                 border: '1px solid var(--color-hairline)',
                 borderRadius: 'var(--radius-xs)',
-                fontSize: '12px',
+                fontSize: '11.5px',
                 fontWeight: 500,
                 cursor: 'pointer',
                 transition: 'all 0.15s ease'
               }}
               aria-label="Download Python file"
             >
-              <DownloadSimple size={14} />
-              <span>Download</span>
+              <DownloadSimple size={13} />
+              <span className="code-action-label">Download</span>
             </button>
 
             {/* Close Button */}
@@ -162,32 +163,44 @@ export const CodeViewerModal: React.FC<CodeViewerModalProps> = ({
                 justifyContent: 'center',
                 padding: '6px',
                 color: 'var(--color-mute)',
+                backgroundColor: 'var(--color-surface-card)',
+                border: '1px solid var(--color-hairline)',
                 borderRadius: 'var(--radius-xs)',
-                marginLeft: '4px'
+                cursor: 'pointer'
               }}
               aria-label="Close code viewer"
             >
-              <X size={18} />
+              <X size={16} />
             </button>
           </div>
         </div>
 
         {/* Code Content Area */}
-        <div style={{ padding: '0', overflowY: 'auto', flex: 1, backgroundColor: 'var(--color-canvas)' }}>
+        <div style={{ padding: '0', overflowY: 'auto', flex: 1, backgroundColor: 'var(--color-canvas)', WebkitOverflowScrolling: 'touch' }}>
           <pre
             className="language-python"
             style={{
               margin: 0,
-              padding: '1.25rem 1.5rem',
+              padding: '1rem 1.25rem',
               backgroundColor: 'transparent',
-              fontSize: '13.5px',
-              lineHeight: 1.6
+              fontSize: '13px',
+              lineHeight: 1.6,
+              overflowX: 'auto',
+              WebkitOverflowScrolling: 'touch'
             }}
           >
             <code className="language-python" dangerouslySetInnerHTML={{ __html: highlightedHtml }} />
           </pre>
         </div>
       </div>
+
+      <style>{`
+        @media (max-width: 440px) {
+          .code-action-label {
+            display: none !important;
+          }
+        }
+      `}</style>
     </div>
   );
 };

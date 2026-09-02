@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import {
   YoutubeLogo,
@@ -20,6 +20,19 @@ export const Footer: React.FC<FooterProps> = ({ hue = -134, onOpenDonate }) => {
 
   const youtubeTimerRef = useRef<number | null>(null);
   const instagramTimerRef = useRef<number | null>(null);
+  const footerRef = useRef<HTMLElement>(null);
+
+  // Close popovers on click outside
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (footerRef.current && !footerRef.current.contains(e.target as Node)) {
+        setYoutubeOpen(false);
+        setInstagramOpen(false);
+      }
+    };
+    document.addEventListener('click', handleClickOutside);
+    return () => document.removeEventListener('click', handleClickOutside);
+  }, []);
 
   const handleYoutubeEnter = () => {
     if (youtubeTimerRef.current) {
@@ -49,14 +62,27 @@ export const Footer: React.FC<FooterProps> = ({ hue = -134, onOpenDonate }) => {
     }, 180);
   };
 
+  const toggleYoutube = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setYoutubeOpen((prev) => !prev);
+    setInstagramOpen(false);
+  };
+
+  const toggleInstagram = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setInstagramOpen((prev) => !prev);
+    setYoutubeOpen(false);
+  };
+
   return (
     <footer
+      ref={footerRef}
       style={{
         position: 'relative',
         backgroundColor: 'var(--color-canvas)',
         borderTop: '1px solid var(--color-hairline)',
         overflow: 'hidden',
-        padding: '64px 24px 48px',
+        padding: 'clamp(48px, 7vw, 64px) clamp(16px, 3vw, 24px) 40px',
         minHeight: '360px',
         display: 'flex',
         flexDirection: 'column',
@@ -79,21 +105,21 @@ export const Footer: React.FC<FooterProps> = ({ hue = -134, onOpenDonate }) => {
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
-            gap: '40px',
-            marginBottom: '48px'
+            gridTemplateColumns: 'repeat(auto-fit, minmax(190px, 1fr))',
+            gap: '32px',
+            marginBottom: '40px'
           }}
         >
           {/* Col 1: Identity & Description */}
           <div>
-            <Link to="/" className="site-title footer-text-shadow" style={{ fontSize: '22px', marginBottom: '12px' }}>
+            <Link to="/" className="site-title footer-text-shadow" style={{ fontSize: '20px', marginBottom: '10px' }}>
               python-learning
             </Link>
             <p
               className="footer-text-shadow"
               style={{
                 color: 'var(--color-body)',
-                fontSize: '14px',
+                fontSize: '13.5px',
                 lineHeight: 1.6,
                 maxWidth: '300px',
                 marginTop: '8px'
@@ -108,34 +134,34 @@ export const Footer: React.FC<FooterProps> = ({ hue = -134, onOpenDonate }) => {
             <h4
               className="footer-text-shadow"
               style={{
-                fontSize: '13px',
+                fontSize: '12.5px',
                 fontWeight: 600,
                 color: 'var(--color-ink)',
                 textTransform: 'uppercase',
                 letterSpacing: '0.05em',
-                marginBottom: '16px'
+                marginBottom: '14px'
               }}
             >
               Navigation
             </h4>
-            <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '10px' }}>
+            <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '8px' }}>
               <li>
-                <Link to="/notes" className="footer-text-shadow" style={{ fontSize: '14px', color: 'var(--color-mute)' }}>
+                <Link to="/notes" className="footer-text-shadow" style={{ fontSize: '13.5px', color: 'var(--color-mute)' }}>
                   Notes Explorer
                 </Link>
               </li>
               <li>
-                <Link to="/projects" className="footer-text-shadow" style={{ fontSize: '14px', color: 'var(--color-mute)' }}>
+                <Link to="/projects" className="footer-text-shadow" style={{ fontSize: '13.5px', color: 'var(--color-mute)' }}>
                   Projects
                 </Link>
               </li>
               <li>
-                <Link to="/practice" className="footer-text-shadow" style={{ fontSize: '14px', color: 'var(--color-mute)' }}>
+                <Link to="/practice" className="footer-text-shadow" style={{ fontSize: '13.5px', color: 'var(--color-mute)' }}>
                   Practice
                 </Link>
               </li>
               <li>
-                <Link to="/links" className="footer-text-shadow" style={{ fontSize: '14px', color: 'var(--color-mute)' }}>
+                <Link to="/links" className="footer-text-shadow" style={{ fontSize: '13.5px', color: 'var(--color-mute)' }}>
                   Resources & Links
                 </Link>
               </li>
@@ -147,23 +173,23 @@ export const Footer: React.FC<FooterProps> = ({ hue = -134, onOpenDonate }) => {
             <h4
               className="footer-text-shadow"
               style={{
-                fontSize: '13px',
+                fontSize: '12.5px',
                 fontWeight: 600,
                 color: 'var(--color-ink)',
                 textTransform: 'uppercase',
                 letterSpacing: '0.05em',
-                marginBottom: '16px'
+                marginBottom: '14px'
               }}
             >
               Support & Community
             </h4>
-            <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '10px' }}>
+            <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '8px' }}>
               <li>
                 <button
                   type="button"
                   onClick={onOpenDonate}
                   className="footer-text-shadow"
-                  style={{ fontSize: '14px', color: 'var(--color-mute)', textAlign: 'left' }}
+                  style={{ fontSize: '13.5px', color: 'var(--color-mute)', textAlign: 'left' }}
                 >
                   Donate via UPI
                 </button>
@@ -174,7 +200,7 @@ export const Footer: React.FC<FooterProps> = ({ hue = -134, onOpenDonate }) => {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="footer-text-shadow"
-                  style={{ fontSize: '14px', color: 'var(--color-mute)' }}
+                  style={{ fontSize: '13.5px', color: 'var(--color-mute)' }}
                 >
                   GitHub Repository
                 </a>
@@ -183,7 +209,7 @@ export const Footer: React.FC<FooterProps> = ({ hue = -134, onOpenDonate }) => {
                 <a
                   href="mailto:howdgx@gmail.com"
                   className="footer-text-shadow"
-                  style={{ fontSize: '14px', color: 'var(--color-mute)' }}
+                  style={{ fontSize: '13.5px', color: 'var(--color-mute)' }}
                 >
                   howdgx@gmail.com
                 </a>
@@ -196,27 +222,26 @@ export const Footer: React.FC<FooterProps> = ({ hue = -134, onOpenDonate }) => {
             <h4
               className="footer-text-shadow"
               style={{
-                fontSize: '13px',
+                fontSize: '12.5px',
                 fontWeight: 600,
                 color: 'var(--color-ink)',
                 textTransform: 'uppercase',
                 letterSpacing: '0.05em',
-                marginBottom: '16px'
+                marginBottom: '14px'
               }}
             >
               Social Platforms
             </h4>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '16px', flexWrap: 'wrap' }}>
-              {/* Grouped YouTube with continuous hover bridge */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flexWrap: 'wrap' }}>
+              {/* Grouped YouTube with continuous hover bridge & tap toggle */}
               <div
                 style={{ position: 'relative' }}
                 onMouseEnter={handleYoutubeEnter}
                 onMouseLeave={handleYoutubeLeave}
               >
-                <a
-                  href="https://www.youtube.com/@notdgx"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <button
+                  type="button"
+                  onClick={toggleYoutube}
                   style={{
                     color: 'var(--color-ink)',
                     padding: '8px',
@@ -225,12 +250,13 @@ export const Footer: React.FC<FooterProps> = ({ hue = -134, onOpenDonate }) => {
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    border: '1px solid var(--color-hairline)'
+                    border: '1px solid var(--color-hairline)',
+                    cursor: 'pointer'
                   }}
                   aria-label="YouTube channels"
                 >
                   <YoutubeLogo size={20} />
-                </a>
+                </button>
 
                 {/* Popover for YouTube */}
                 <div
@@ -283,16 +309,15 @@ export const Footer: React.FC<FooterProps> = ({ hue = -134, onOpenDonate }) => {
                 </div>
               </div>
 
-              {/* Grouped Instagram with continuous hover bridge */}
+              {/* Grouped Instagram with continuous hover bridge & tap toggle */}
               <div
                 style={{ position: 'relative' }}
                 onMouseEnter={handleInstagramEnter}
                 onMouseLeave={handleInstagramLeave}
               >
-                <a
-                  href="https://www.instagram.com/notdgx"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <button
+                  type="button"
+                  onClick={toggleInstagram}
                   style={{
                     color: 'var(--color-ink)',
                     padding: '8px',
@@ -301,12 +326,13 @@ export const Footer: React.FC<FooterProps> = ({ hue = -134, onOpenDonate }) => {
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    border: '1px solid var(--color-hairline)'
+                    border: '1px solid var(--color-hairline)',
+                    cursor: 'pointer'
                   }}
                   aria-label="Instagram profiles"
                 >
                   <InstagramLogo size={20} />
-                </a>
+                </button>
 
                 {/* Popover for Instagram */}
                 <div
@@ -423,14 +449,14 @@ export const Footer: React.FC<FooterProps> = ({ hue = -134, onOpenDonate }) => {
         {/* Bottom Copyright Row */}
         <div
           style={{
-            paddingTop: '24px',
+            paddingTop: '20px',
             borderTop: '1px solid var(--color-hairline-soft)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
             flexWrap: 'wrap',
-            gap: '16px',
-            fontSize: '13px',
+            gap: '12px',
+            fontSize: '12.5px',
             color: 'var(--color-mute)'
           }}
         >

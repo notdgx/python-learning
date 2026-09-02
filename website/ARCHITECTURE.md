@@ -15,9 +15,7 @@ The website is not the source of truth. It is a generated presentation layer ove
 
 ---
 
-## 2. Final Repository Structure
-
-The current repository intentionally starts small while leaving room for the architecture to scale.
+## 2. Repository Structure
 
 ```text
 .
@@ -33,26 +31,71 @@ The current repository intentionally starts small while leaving room for the arc
 │   ├── index.md
 │   ├── metadata.json
 │   ├── notes-tracker.py
-│   ├── 00-syntax-and-basics/
-│   │   ├── 00-variables-and-datatypes/
-│   │   │   ├── 00-integer.md
+│   ├── 00-Basics/
+│   │   ├── 00-Intro-and-Internal-Working/
+│   │   │   ├── 00-LowLevelExecution.md
 │   │   │   ├── 00-reference-file-1.py
-│   │   │   ├── 01-float.md
+│   │   │   ├── 01-MultilangIntegration.md
 │   │   │   └── ...
-│   │   ├── 01-operators/
 │   │   └── ...
 │   └── ...
 ├── practice/
-│   └── index.md
+│   ├── index.md
+│   ├── 00-Basics/
+│   │   └── 00-Intro-and-Internal-Working/
+│   │       ├── 00-LowLevelExecution.md
+│   │       └── ...
+│   └── ...
 ├── projects/
 │   └── index.md
 └── website/
     ├── AGENTS.md
     ├── ARCHITECTURE.md
-    └── DESIGN.md
+    ├── DESIGN.md
+    ├── package.json
+    ├── tsconfig.json
+    ├── vite.config.ts
+    ├── src/
+    │   ├── App.tsx
+    │   ├── main.tsx
+    │   ├── types/
+    │   │   └── content.ts
+    │   ├── services/
+    │   │   └── contentService.ts
+    │   ├── components/
+    │   │   ├── animations/
+    │   │   │   ├── RibbonFieldBackground.tsx
+    │   │   │   └── EmeraldHorizonBackground.tsx
+    │   │   ├── layout/
+    │   │   │   ├── Navbar.tsx
+    │   │   │   ├── LinksDropdown.tsx
+    │   │   │   └── Footer.tsx
+    │   │   ├── notes/
+    │   │   │   ├── TopicSidebar.tsx
+    │   │   │   ├── TableOfContents.tsx
+    │   │   │   ├── Breadcrumbs.tsx
+    │   │   │   ├── PrevNextNav.tsx
+    │   │   │   ├── ReferenceFileList.tsx
+    │   │   │   └── CodeViewerModal.tsx
+    │   │   ├── donation/
+    │   │   │   └── UpiModal.tsx
+    │   │   └── common/
+    │   │       └── EmptyState.tsx
+    │   ├── pages/
+    │   │   ├── HomePage.tsx
+    │   │   ├── NotesExplorerPage.tsx
+    │   │   ├── NoteDetailPage.tsx
+    │   │   ├── PracticePage.tsx
+    │   │   ├── ProjectsPage.tsx
+    │   │   ├── LinksPage.tsx
+    │   │   ├── DonatePage.tsx
+    │   │   └── NotFoundPage.tsx
+    │   └── styles/
+    │       └── globals.css
+    └── dist/
 ```
 
-The archived material is intentionally outside the active information architecture. It must not be automatically surfaced in the public notes navigation unless explicitly promoted later.
+The archived material (`archive/`) is intentionally outside the active information architecture. It must not be automatically surfaced in the public notes navigation unless explicitly migrated.
 
 ---
 
@@ -966,44 +1009,116 @@ Download must use exact file content packaged at build time.
 
 ---
 
-# 24. Future Content Domains
+# 24. Practice & Projects Architecture & Cross-Domain Linking
 
-`practice/` and `projects/` will later adopt schemas similar to `notes/`.
-
-They should not be mixed into the initial notes taxonomy.
-
-Future likely shapes:
+### 24.1 Directory Structure Parity
+The `practice/` domain mirrors the exact same topic/subtopic directory hierarchy as `notes/`:
 
 ```text
+notes/
+└── NN-topic/
+    └── NN-subtopic/
+        ├── NN-note-name.md
+        └── NN-reference-file-1.py
+
 practice/
-├── index.md
-├── metadata.json
-├── practice-tracker.py
-└── ...
-
-projects/
-├── index.md
-├── metadata.json
-├── project-tracker.py
-└── ...
+└── NN-topic/
+    └── NN-subtopic/
+        ├── NN-note-name.md
+        └── ...
 ```
 
-The website architecture should therefore model content as extensible sections rather than hard-coding “notes” throughout every component.
+### 24.2 Bidirectional Linking Contract
+When a file in `practice/` exists at the identical relative path structure and matches the slug/name of a note in `notes/` (e.g. `practice/00-Basics/00-Intro-and-Internal-Working/00-LowLevelExecution.md` vs `notes/00-Basics/00-Intro-and-Internal-Working/00-LowLevelExecution.md`):
 
-Conceptually:
-
-```text
-ContentSection
-├── notes
-├── practice
-└── projects
-```
-
-Only `notes` is fully implemented initially.
+1. **Automatic Connection**: The tracker and metadata service detect that these two files represent a **Connected Theory & Practice Pair**.
+2. **Metadata Fields**:
+   - The note metadata node includes `practiceRoute: "/practice/basics/intro-and-internal-working/lowlevelexecution"` (or `null` if no matching practice exercise exists).
+   - The practice metadata node includes `noteRoute: "/notes/basics/intro-and-internal-working/lowlevelexecution"`.
+3. **UI Integration**:
+   - **On the Note Page (`NoteDetailPage`)**: The right-side rail / TOC panel renders an actionable **"Practice Related Exercises"** button/card linking directly to the practice exercise.
+   - **On the Practice Page**: The problem statement header renders a **"View Theory Notes"** link/button jumping straight back to the foundational theory.
 
 ---
 
-# 25. Separation from `DESIGN.md`
+# 25. Mobile Architecture & React Portals
+
+To provide an uncompromising mobile experience without desktop compromises, the website employs specific architectural patterns:
+
+### 25.1 React Portal Isolation for Drawers & Modals
+In modern CSS, applying `backdrop-filter`, `filter`, or `transform` to a container creates a new containing block for all its descendants, even those with `position: fixed`. To prevent fixed mobile drawers and overlays from being constrained/clipped by `<header>` (height 56px), all mobile overlays are rendered directly to `document.body` using `createPortal`:
+
+```tsx
+// Pattern used in Navbar.tsx for the mobile navigation drawer
+{mobileMenuOpen && typeof document !== 'undefined' && createPortal(
+  <div className="mobile-nav-portal" style={{ position: 'fixed', top: 'var(--navbar-height)', left: 0, right: 0, bottom: 0, zIndex: 99999 }}>
+    {/* Navigation Links, Practice jump, Donate CTA, GitHub Star link */}
+  </div>,
+  document.body
+)}
+```
+
+### 25.2 Dual-Mode Sidebar Architecture (`TopicSidebar.tsx`)
+- **Desktop (`>= 1024px`)**: Static sticky left rail (280px width) staying in-flow.
+- **Mobile & Tablet (`< 1024px`)**: Off-canvas slide-out drawer (`position: fixed; left: 0; top: 0; bottom: 0; width: min(320px, 85vw); z-index: 600;`), with dark backdrop blur overlay (`rgba(0,0,0,0.75)`), body scroll locking (`document.body.style.overflow = 'hidden'`), auto-closing upon tapping any note link, and a floating `Topics` pill button when closed.
+
+### 25.3 Mobile Table of Contents Accordion (`NoteDetailPage.tsx`)
+- On screens `< 1100px` where the right-hand TOC rail is hidden, a collapsible "On this page" Table of Contents accordion is inserted directly before the markdown note body so mobile users retain heading-jump capabilities.
+
+### 25.4 Touch Momentum & Grid Resiliency
+- Breadcrumbs and code viewer containers use `overflow-x: auto` with `-webkit-overflow-scrolling: touch` and `white-space: nowrap`.
+- All card grids use `grid-template-columns: repeat(auto-fit, minmax(270px, 1fr))` to guarantee zero horizontal overflow blowout on small phone screens (320px–375px).
+
+---
+
+# 26. WebGL Animation Architecture
+
+The website incorporates two continuous, GPU-accelerated WebGL backgrounds designed to blend seamlessly with the dark developer canvas:
+
+### 26.1 Hero Ribbon Field (`RibbonFieldBackground.tsx`)
+- Implemented in custom GLSL shaders rendered on a WebGL canvas.
+- Dynamically cycles hues over time with subtle pointer/mouse drift.
+- Responsive sizing: maintains aspect ratio on desktop while expanding dynamically to content height on mobile (`aspect-ratio: auto` on mobile with `padding: clamp(48px, 8vw, 72px) 16px`).
+
+### 26.2 Footer Emerald Horizon (`EmeraldHorizonBackground.tsx`)
+- Implemented with Three.js rendering an undulating wave plane with custom shaders.
+- **Zero Vignette Rule**: Always initialized with `vignette = 0` to preserve pure edge-to-edge dark canvas harmony.
+- Synchronized hue cycling with the hero component.
+
+---
+
+# 27. Complete System Blueprint for Replication
+
+Any developer or AI agent can replicate this entire learning notes & website platform by following this deterministic four-tier architecture:
+
+```text
+Tier 1: Markdown & Python Content Root (notes/, practice/, projects/)
+  ├── Numeric prefix ordering (NN-topic/NN-subtopic/NN-note.md)
+  ├── Minimal YAML frontmatter (date, time)
+  └── Sibling Python files (NN-reference-file-K.py)
+
+Tier 2: Content Generation Engine (notes/notes-tracker.py)
+  ├── AST heading extraction
+  ├── Slugification & route computation
+  ├── JSON index compilation (notes/metadata.json)
+  └── Markdown roadmap manifest (notes/index.md)
+
+Tier 3: Presentation & Component Layer (website/src/)
+  ├── Content service & search indexer (contentService.ts)
+  ├── Responsive 3-column note layout with mobile drawer portals
+  ├── WebGL Ribbon & Three.js Emerald shaders
+  ├── In-page code viewer modal & UPI donation system
+  └── Pure CSS variables & dark canvas styling (globals.css)
+
+Tier 4: Static Compilation & Deployment (Vite + Cloudflare Pages)
+  ├── Pre-build script: python3 ../notes/notes-tracker.py
+  ├── Static compilation: vite build -> dist/
+  └── Cloudflare Pages static hosting with SPA deep-link fallback
+```
+
+---
+
+# 28. Separation from `DESIGN.md`
 
 `ARCHITECTURE.md` defines:
 

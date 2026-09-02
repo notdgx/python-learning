@@ -404,14 +404,31 @@ copy, mail, donation, and platform icons wherever available.
 
 Desktop navbar:
 
-- left: **text-only `notdgx` title**
-- center: page navigation
+- left: **text-only `python-learning` title** (Times NR MT font, bold + italic)
+- center: primary page navigation (Home, Notes, Projects, Practice)
 - center/right: `Links` dropdown
-- right: `Donate` and any page-specific primary action
+- right: GitHub Star badge, **text-only `Donate` CTA button (NO currency/rupee logo)**
 
-Do not place the favicon/logo beside the title.
+Mobile navbar:
+- left: `python-learning` brand title (scaled to `17px` on `< 480px`)
+- right: GitHub star icon button, compact Donate CTA, and **3-line SVG hamburger menu button**
 
-### 4.2 Title typography
+### 4.2 Donate Button Rule:
+The primary Donate button in the navigation header must be a clean, styled button displaying text only:
+```html
+<button class="btn-primary nav-donate-btn">
+  <span>Donate</span>
+</button>
+```
+**Never attach a rupee (`₹` / `CurrencyInr`) or currency logo to the navbar donate button.**
+
+### 4.3 Mobile Navigation Drawer:
+When the 3-line hamburger menu is tapped on mobile viewports (`< 768px`), it opens a full-screen navigation overlay.
+- **Portaling Invariant**: Must be rendered via `createPortal(drawer, document.body)` so it is never trapped or clipped inside parent containers with CSS `backdrop-filter`.
+- Contains touch-friendly option items: Home, Notes Explorer, Projects, Practice, Links Directory, plus Donate and GitHub repository actions.
+- Automatically closes upon tapping any link, pressing `Escape`, or switching routes.
+
+### 4.4 Title typography
 
 Use the supplied `Times NR MT Regular.otf` **only** for the navbar title.
 
@@ -1248,10 +1265,53 @@ The sections retained from the original analysis are intentionally preserved for
 hierarchy, radius, component, responsive, and depth information. When any retained paragraph conflicts
 with this document, this final rule set wins:
 
-- identity is notdgx only
-- navbar title is text-only; no logo beside the title
+- identity is `python-learning` (maintained by `notdgx`)
+- navbar title is text-only (`python-learning`); no logo beside the title
 - navbar title uses Times NR MT and is bold italic at rest; hover/focus only animates its underline
-- Links menu is icon + username, without written platform labels
+- navbar Donate CTA is text-only: `<span>Donate</span>` — **strictly zero currency/rupee logos**
+- Links menu is icon + username, without redundant written platform labels
+- mobile full-screen drawers must be mounted to `document.body` via React `createPortal` to prevent CSS `backdrop-filter` clipping
+
+---
+
+## 20. Connected Practice & Theory UI Patterns
+
+When notes and practice items share identical relative paths (`notes/NN-topic/NN-subtopic/NN-name.md` ↔ `practice/NN-topic/NN-subtopic/NN-name.md`):
+
+### 20.1 In Note Detail View (`NoteDetailPage.tsx`)
+- Right rail (Desktop) and mobile TOC section: Render an elevated card:
+  - Label: `Practice Related Problems`
+  - Visual: `Lightbulb` icon + note title + `ArrowRight`
+  - Action: Navigates directly to `/practice/<topic>/<subtopic>/<name>`
+
+### 20.2 In Practice View (`PracticePage.tsx`)
+- Problem statement header: Render a secondary theory link:
+  - Label: `Review Theory Note`
+  - Visual: `BookOpen` icon + `ArrowLeft`
+  - Action: Navigates directly back to `/notes/<topic>/<subtopic>/<name>`
+
+---
+
+## 21. WebGL Background Shaders & Zero Vignette Rule
+
+### 21.1 Hero Ribbon Field (`RibbonFieldBackground.tsx`)
+- WebGL GPU-accelerated ribbon field shader.
+- Slow, continuous hue cycling with mouse/pointer drift.
+- Responsive container: 16:9 on desktop, fluid height on mobile (`aspect-ratio: auto`).
+
+### 21.2 Footer Emerald Horizon (`EmeraldHorizonBackground.tsx`)
+- Three.js undulating wave plane.
+- **Strict Invariant**: `vignette = 0` (Zero Vignette Rule). Under no circumstances may a radial vignette or corner shading be enabled on the footer shader.
+- Synchronized hue cycling with hero background.
+
+---
+
+## 22. Mobile Viewport & Touch Invariants
+
+- **Card Grids**: All card collections (Home topics, Notes Explorer subtopics, Links directory, Practice previews) must use `grid-template-columns: repeat(auto-fit, minmax(270px, 1fr))` to guarantee zero horizontal overflow on small 320px–375px phone viewports.
+- **Touch Targets**: Minimum 36px height; text inputs 44px; touch actions use `touch-action: manipulation` and `-webkit-tap-highlight-color: transparent`.
+- **Social Popovers (Footer & Dropdowns)**: Support both desktop hover bridges and tap-to-toggle click handlers with outside-click dismissal for mobile touch devices.
+- **Topic Navigation Drawer**: On screens `< 1024px`, TopicSidebar transitions to a smooth off-canvas drawer with dark backdrop blur (`rgba(0,0,0,0.75)`), body scroll locking, and auto-closing on note tap.
 - the pointer path into every hover menu stays connected so the menu never vanishes en route
 - one YouTube footer icon expands to two YouTube usernames
 - one Instagram footer icon expands to two Instagram usernames

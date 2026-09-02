@@ -59,10 +59,10 @@ export const UpiModal: React.FC<UpiModalProps> = ({ isOpen, onClose }) => {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        padding: '1rem',
-        backgroundColor: 'rgba(0, 0, 0, 0.75)',
-        backdropFilter: 'blur(12px)',
-        WebkitBackdropFilter: 'blur(12px)',
+        padding: '16px',
+        backgroundColor: 'rgba(0, 0, 0, 0.8)',
+        backdropFilter: 'blur(16px)',
+        WebkitBackdropFilter: 'blur(16px)',
         animation: 'fadeIn 0.2s ease-out'
       }}
       onClick={(e) => {
@@ -75,13 +75,13 @@ export const UpiModal: React.FC<UpiModalProps> = ({ isOpen, onClose }) => {
       <div
         ref={modalRef}
         style={{
-          width: '100%',
+          width: 'calc(100vw - 32px)',
           maxWidth: '380px',
           backgroundColor: 'var(--color-surface)',
           border: '1px solid var(--color-hairline-strong)',
           borderRadius: 'var(--radius-xl)',
-          padding: '24px',
-          boxShadow: '0 20px 40px rgba(0, 0, 0, 0.8)',
+          padding: 'clamp(20px, 4vw, 28px) clamp(16px, 3vw, 24px)',
+          boxShadow: '0 24px 48px rgba(0, 0, 0, 0.9)',
           position: 'relative',
           display: 'flex',
           flexDirection: 'column',
@@ -93,18 +93,19 @@ export const UpiModal: React.FC<UpiModalProps> = ({ isOpen, onClose }) => {
           onClick={onClose}
           style={{
             position: 'absolute',
-            top: '16px',
-            right: '16px',
+            top: '14px',
+            right: '14px',
             color: 'var(--color-mute)',
-            padding: '4px',
+            padding: '6px',
             borderRadius: 'var(--radius-sm)',
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'center'
+            justifyContent: 'center',
+            backgroundColor: 'var(--color-surface-elevated)'
           }}
           aria-label="Close donation modal"
         >
-          <X size={20} />
+          <X size={18} />
         </button>
 
         <div
@@ -126,7 +127,7 @@ export const UpiModal: React.FC<UpiModalProps> = ({ isOpen, onClose }) => {
         <h2 id="upi-modal-title" style={{ fontSize: '1.2rem', color: 'var(--color-ink)', marginBottom: '4px' }}>
           Support python-learning
         </h2>
-        <p style={{ fontSize: '0.85rem', color: 'var(--color-mute)', marginBottom: '18px' }}>
+        <p style={{ fontSize: '0.85rem', color: 'var(--color-mute)', marginBottom: '16px' }}>
           Scan with any UPI app to donate directly
         </p>
 
@@ -137,10 +138,11 @@ export const UpiModal: React.FC<UpiModalProps> = ({ isOpen, onClose }) => {
             backgroundColor: 'var(--color-surface-elevated)',
             border: '1px solid var(--color-hairline)',
             borderRadius: 'var(--radius-lg)',
-            marginBottom: '18px',
+            marginBottom: '16px',
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'center'
+            justifyContent: 'center',
+            maxWidth: '100%'
           }}
         >
           {qrDataUrl ? (
@@ -148,14 +150,15 @@ export const UpiModal: React.FC<UpiModalProps> = ({ isOpen, onClose }) => {
               src={qrDataUrl}
               alt="UPI QR Code"
               style={{
-                width: '190px',
-                height: '190px',
+                width: 'min(190px, 50vw)',
+                height: 'auto',
+                aspectRatio: '1',
                 display: 'block',
                 borderRadius: 'var(--radius-sm)'
               }}
             />
           ) : (
-            <div style={{ width: '190px', height: '190px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-stone)' }}>
+            <div style={{ width: '180px', height: '180px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-stone)' }}>
               Generating QR...
             </div>
           )}
@@ -168,11 +171,13 @@ export const UpiModal: React.FC<UpiModalProps> = ({ isOpen, onClose }) => {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
+            gap: '8px',
             padding: '8px 12px',
             backgroundColor: 'var(--color-surface-card)',
             border: '1px solid var(--color-hairline)',
             borderRadius: 'var(--radius-md)',
-            marginBottom: '8px'
+            marginBottom: '8px',
+            flexWrap: 'wrap'
           }}
         >
           <code style={{ fontFamily: 'var(--font-mono)', fontSize: '13px', color: 'var(--color-ink)' }}>

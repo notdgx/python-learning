@@ -90,24 +90,24 @@ export const LinksPage: React.FC = () => {
   ];
 
   return (
-    <div style={{ maxWidth: 'var(--max-content-width)', margin: '0 auto', padding: '48px 24px 80px', width: '100%' }}>
-      <div style={{ marginBottom: '36px' }}>
+    <div style={{ maxWidth: 'var(--max-content-width)', margin: '0 auto', padding: 'clamp(32px, 5vw, 48px) clamp(16px, 3vw, 24px) 80px', width: '100%', overflowX: 'hidden' }}>
+      <div style={{ marginBottom: '32px' }}>
         <span style={{ fontSize: '12px', fontWeight: 600, color: 'var(--color-mute)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
           Directory
         </span>
-        <h1 style={{ fontSize: '2.4rem', color: 'var(--color-ink)', marginTop: '4px', marginBottom: '8px' }}>
+        <h1 style={{ fontSize: 'clamp(1.8rem, 5vw, 2.4rem)', color: 'var(--color-ink)', marginTop: '4px', marginBottom: '8px' }}>
           Resources & Links
         </h1>
-        <p style={{ fontSize: '15px', color: 'var(--color-mute)', maxWidth: '650px' }}>
+        <p style={{ fontSize: '14.5px', color: 'var(--color-mute)', maxWidth: '650px', lineHeight: 1.6 }}>
           Curated directory of creator channels, community profiles, official Python resources, and repositories.
         </p>
       </div>
 
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '48px' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '40px' }}>
         {resourceCategories.map((cat, idx) => (
-          <div key={idx} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+          <div key={idx} style={{ display: 'flex', flexDirection: 'column', gap: '18px' }}>
             <div>
-              <h2 style={{ fontSize: '1.4rem', color: 'var(--color-ink)', marginBottom: '4px' }}>
+              <h2 style={{ fontSize: 'clamp(1.25rem, 3.5vw, 1.4rem)', color: 'var(--color-ink)', marginBottom: '4px' }}>
                 {cat.title}
               </h2>
               <p style={{ fontSize: '13.5px', color: 'var(--color-mute)' }}>
@@ -115,7 +115,7 @@ export const LinksPage: React.FC = () => {
               </p>
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '16px' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(270px, 1fr))', gap: '14px' }}>
               {cat.items.map((item, itemIdx) => (
                 <a
                   key={itemIdx}
@@ -127,39 +127,40 @@ export const LinksPage: React.FC = () => {
                     display: 'flex',
                     flexDirection: 'column',
                     justifyContent: 'space-between',
-                    gap: '16px',
-                    padding: '20px'
+                    gap: '14px',
+                    padding: '16px 18px'
                   }}
                 >
                   <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                       <div
                         style={{
-                          width: '40px',
-                          height: '40px',
+                          width: '38px',
+                          height: '38px',
                           borderRadius: 'var(--radius-md)',
                           backgroundColor: 'var(--color-surface-card)',
                           display: 'flex',
                           alignItems: 'center',
                           justifyContent: 'center',
-                          color: 'var(--color-ink)'
+                          color: 'var(--color-ink)',
+                          flexShrink: 0
                         }}
                       >
                         {item.icon}
                       </div>
-                      <div>
-                        <h3 style={{ fontSize: '14.5px', color: 'var(--color-ink)', fontWeight: 500 }}>
+                      <div style={{ minWidth: 0 }}>
+                        <h3 style={{ fontSize: '14px', color: 'var(--color-ink)', fontWeight: 500, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                           {item.name}
                         </h3>
-                        <span style={{ fontSize: '12px', color: 'var(--color-mute)', fontFamily: 'var(--font-mono)' }}>
+                        <span style={{ fontSize: '11.5px', color: 'var(--color-mute)', fontFamily: 'var(--font-mono)' }}>
                           {item.handle}
                         </span>
                       </div>
                     </div>
-                    <ArrowSquareOut size={16} color="var(--color-mute)" />
+                    <ArrowSquareOut size={16} color="var(--color-mute)" style={{ flexShrink: 0, marginLeft: '8px' }} />
                   </div>
 
-                  <p style={{ fontSize: '13px', color: 'var(--color-mute)', lineHeight: 1.5 }}>
+                  <p style={{ fontSize: '12.5px', color: 'var(--color-mute)', lineHeight: 1.5, margin: 0 }}>
                     {item.desc}
                   </p>
                 </a>

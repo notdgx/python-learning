@@ -16,25 +16,30 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
   return (
     <nav
       aria-label="Breadcrumbs"
+      className="breadcrumbs-nav"
       style={{
         display: 'flex',
         alignItems: 'center',
         gap: '6px',
-        fontSize: '13px',
+        fontSize: '12.5px',
         color: 'var(--color-mute)',
-        flexWrap: 'wrap',
-        marginBottom: '1.5rem'
+        marginBottom: '1.25rem',
+        overflowX: 'auto',
+        whiteSpace: 'nowrap',
+        WebkitOverflowScrolling: 'touch',
+        scrollbarWidth: 'none',
+        paddingBottom: '2px'
       }}
     >
-      <Link to="/notes" style={{ color: 'var(--color-mute)', transition: 'color 0.15s ease' }}>
+      <Link to="/notes" style={{ color: 'var(--color-mute)', transition: 'color 0.15s ease', flexShrink: 0 }}>
         Python Learning
       </Link>
-      <CaretRight size={12} color="var(--color-stone)" />
-      <span style={{ color: 'var(--color-charcoal)' }}>{topicTitle}</span>
-      <CaretRight size={12} color="var(--color-stone)" />
-      <span style={{ color: 'var(--color-charcoal)' }}>{subtopicTitle}</span>
-      <CaretRight size={12} color="var(--color-stone)" />
-      <span style={{ color: 'var(--color-ink)', fontWeight: 500 }}>{noteTitle}</span>
+      <CaretRight size={12} color="var(--color-stone)" style={{ flexShrink: 0 }} />
+      <span style={{ color: 'var(--color-charcoal)', flexShrink: 0 }}>{topicTitle}</span>
+      <CaretRight size={12} color="var(--color-stone)" style={{ flexShrink: 0 }} />
+      <span style={{ color: 'var(--color-charcoal)', flexShrink: 0 }}>{subtopicTitle}</span>
+      <CaretRight size={12} color="var(--color-stone)" style={{ flexShrink: 0 }} />
+      <span style={{ color: 'var(--color-ink)', fontWeight: 500, flexShrink: 0 }}>{noteTitle}</span>
     </nav>
   );
 };

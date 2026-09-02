@@ -7,23 +7,23 @@ export const NotFoundPage: React.FC = () => {
     <div
       style={{
         maxWidth: '600px',
-        margin: '100px auto',
-        padding: '0 24px',
+        margin: 'clamp(60px, 12vw, 100px) auto',
+        padding: '0 16px',
         textAlign: 'center',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        gap: '20px'
+        gap: '18px'
       }}
     >
-      <div style={{ fontSize: '4rem', fontWeight: 700, color: 'var(--color-ash)', fontFamily: 'var(--font-mono)' }}>
+      <div style={{ fontSize: 'clamp(3rem, 10vw, 4rem)', fontWeight: 700, color: 'var(--color-ash)', fontFamily: 'var(--font-mono)' }}>
         404
       </div>
-      <h1 style={{ fontSize: '1.8rem', color: 'var(--color-ink)' }}>Page Not Found</h1>
-      <p style={{ fontSize: '15px', color: 'var(--color-mute)', lineHeight: 1.6, maxWidth: '440px' }}>
+      <h1 style={{ fontSize: 'clamp(1.5rem, 4vw, 1.8rem)', color: 'var(--color-ink)' }}>Page Not Found</h1>
+      <p style={{ fontSize: '14.5px', color: 'var(--color-mute)', lineHeight: 1.6, maxWidth: '440px' }}>
         The page or note you are looking for does not exist or has been moved.
       </p>
-      <div style={{ display: 'flex', gap: '12px', marginTop: '12px' }}>
+      <div style={{ display: 'flex', gap: '12px', marginTop: '12px', flexWrap: 'wrap', justifyContent: 'center' }}>
         <Link to="/" className="btn-primary">
           <House size={16} />
           <span>Go to Home</span>

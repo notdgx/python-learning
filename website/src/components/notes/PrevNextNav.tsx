@@ -14,10 +14,11 @@ export const PrevNextNav: React.FC<PrevNextNavProps> = ({ prev, next }) => {
   return (
     <nav
       aria-label="Previous and Next note navigation"
+      className="prev-next-nav"
       style={{
         display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-        gap: '16px',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
+        gap: '14px',
         marginTop: '3.5rem',
         paddingTop: '2rem',
         borderTop: '1px solid var(--color-hairline)'
@@ -30,7 +31,7 @@ export const PrevNextNav: React.FC<PrevNextNavProps> = ({ prev, next }) => {
             display: 'flex',
             flexDirection: 'column',
             gap: '6px',
-            padding: '16px',
+            padding: '14px 16px',
             backgroundColor: 'var(--color-surface)',
             border: '1px solid var(--color-hairline)',
             borderRadius: 'var(--radius-md)',
@@ -48,11 +49,13 @@ export const PrevNextNav: React.FC<PrevNextNavProps> = ({ prev, next }) => {
           <span style={{ display: 'inline-flex', alignItems: 'center', gap: '4px', fontSize: '12px', color: 'var(--color-mute)' }}>
             <CaretLeft size={12} /> Previous Note
           </span>
-          <span style={{ fontSize: '14.5px', fontWeight: 500, color: 'var(--color-ink)' }}>
+          <span style={{ fontSize: '14px', fontWeight: 500, color: 'var(--color-ink)' }}>
             {prev.metadata.title}
           </span>
         </Link>
-      ) : <div />}
+      ) : (
+        <div className="prev-nav-spacer" />
+      )}
 
       {next ? (
         <Link
@@ -63,7 +66,7 @@ export const PrevNextNav: React.FC<PrevNextNavProps> = ({ prev, next }) => {
             alignItems: 'flex-end',
             textAlign: 'right',
             gap: '6px',
-            padding: '16px',
+            padding: '14px 16px',
             backgroundColor: 'var(--color-surface)',
             border: '1px solid var(--color-hairline)',
             borderRadius: 'var(--radius-md)',
@@ -81,11 +84,24 @@ export const PrevNextNav: React.FC<PrevNextNavProps> = ({ prev, next }) => {
           <span style={{ display: 'inline-flex', alignItems: 'center', gap: '4px', fontSize: '12px', color: 'var(--color-mute)' }}>
             Next Note <CaretRight size={12} />
           </span>
-          <span style={{ fontSize: '14.5px', fontWeight: 500, color: 'var(--color-ink)' }}>
+          <span style={{ fontSize: '14px', fontWeight: 500, color: 'var(--color-ink)' }}>
             {next.metadata.title}
           </span>
         </Link>
-      ) : <div />}
+      ) : (
+        <div className="next-nav-spacer" />
+      )}
+
+      <style>{`
+        @media (max-width: 540px) {
+          .prev-nav-spacer, .next-nav-spacer {
+            display: none !important;
+          }
+          .prev-next-nav {
+            grid-template-columns: 1fr !important;
+          }
+        }
+      `}</style>
     </nav>
   );
 };

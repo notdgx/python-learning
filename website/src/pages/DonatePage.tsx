@@ -32,8 +32,8 @@ export const DonatePage: React.FC = () => {
   };
 
   return (
-    <div style={{ maxWidth: '800px', margin: '0 auto', padding: '48px 24px 80px', width: '100%' }}>
-      <div style={{ textAlign: 'center', marginBottom: '40px' }}>
+    <div style={{ maxWidth: '800px', margin: '0 auto', padding: 'clamp(32px, 5vw, 48px) clamp(16px, 3vw, 24px) 80px', width: '100%', overflowX: 'hidden' }}>
+      <div style={{ textAlign: 'center', marginBottom: '32px' }}>
         <div
           style={{
             width: '48px',
@@ -49,10 +49,10 @@ export const DonatePage: React.FC = () => {
         >
           <Heart size={24} color="#f472b6" weight="fill" />
         </div>
-        <h1 style={{ fontSize: '2.4rem', color: 'var(--color-ink)', marginBottom: '8px' }}>
+        <h1 style={{ fontSize: 'clamp(1.8rem, 5vw, 2.4rem)', color: 'var(--color-ink)', marginBottom: '8px' }}>
           Support python-learning
         </h1>
-        <p style={{ fontSize: '15px', color: 'var(--color-mute)', maxWidth: '540px', margin: '0 auto' }}>
+        <p style={{ fontSize: '14.5px', color: 'var(--color-mute)', maxWidth: '540px', margin: '0 auto', lineHeight: 1.6 }}>
           This project is an open, high-quality technical repository developed to provide clean, deep Python learning for developers worldwide.
         </p>
       </div>
@@ -65,12 +65,13 @@ export const DonatePage: React.FC = () => {
           flexDirection: 'column',
           alignItems: 'center',
           textAlign: 'center',
-          padding: '36px 24px',
+          padding: 'clamp(24px, 4vw, 36px) clamp(16px, 3vw, 24px)',
           maxWidth: '480px',
+          width: '100%',
           margin: '0 auto'
         }}
       >
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '16px', color: 'var(--color-ink)', fontSize: '16px', fontWeight: 600 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '16px', color: 'var(--color-ink)', fontSize: '15px', fontWeight: 600 }}>
           <QrCode size={20} />
           <span>UPI Instant Payment</span>
         </div>
@@ -85,17 +86,18 @@ export const DonatePage: React.FC = () => {
             marginBottom: '20px',
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'center'
+            justifyContent: 'center',
+            maxWidth: '100%'
           }}
         >
           {qrDataUrl ? (
             <img
               src={qrDataUrl}
               alt="UPI QR Code"
-              style={{ width: '220px', height: '220px', display: 'block', borderRadius: 'var(--radius-sm)' }}
+              style={{ width: 'min(220px, 60vw)', height: 'auto', aspectRatio: '1', display: 'block', borderRadius: 'var(--radius-sm)' }}
             />
           ) : (
-            <div style={{ width: '220px', height: '220px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-mute)' }}>
+            <div style={{ width: '200px', height: '200px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-mute)' }}>
               Generating QR...
             </div>
           )}
@@ -108,14 +110,16 @@ export const DonatePage: React.FC = () => {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
+            gap: '8px',
             padding: '10px 14px',
             backgroundColor: 'var(--color-surface-card)',
             border: '1px solid var(--color-hairline)',
             borderRadius: 'var(--radius-md)',
-            marginBottom: '14px'
+            marginBottom: '14px',
+            flexWrap: 'wrap'
           }}
         >
-          <code style={{ fontFamily: 'var(--font-mono)', fontSize: '14px', color: 'var(--color-ink)' }}>
+          <code style={{ fontFamily: 'var(--font-mono)', fontSize: '13.5px', color: 'var(--color-ink)' }}>
             {upiId}
           </code>
           <button
@@ -141,8 +145,8 @@ export const DonatePage: React.FC = () => {
           </button>
         </div>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: '6px', color: 'var(--color-ash)', fontSize: '12px' }}>
-          <ShieldCheck size={16} />
+        <div style={{ display: 'flex', alignItems: 'center', gap: '6px', color: 'var(--color-ash)', fontSize: '12px', textAlign: 'center', justifyContent: 'center' }}>
+          <ShieldCheck size={16} style={{ flexShrink: 0 }} />
           <span>Zero fee direct payment via GPay, PhonePe, Paytm, or BHIM.</span>
         </div>
       </div>

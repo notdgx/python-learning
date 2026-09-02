@@ -363,63 +363,86 @@ SPA deep links must remain functional on Pages.
 
 # 17. Website Navigation Contract
 
-The global navbar currently includes:
+The global navbar includes:
 
 ```text
+Home (Brand Title: python-learning)
 Notes
 Projects
 Practice
-Links
-Donate
-GitHub icon
-Repository star count
+Links (Dropdown on desktop, dedicated route /links)
+Donate (Clean CTA button — NO currency/rupee logo)
+GitHub icon + Repository star badge
+Mobile hamburger menu toggle (3 clean SVG lines -> SVG X)
 ```
 
-The homepage includes a hero and footer, with visual details governed by `DESIGN.md`.
+The homepage includes a WebGL Ribbon Field hero and a Three.js Emerald Horizon footer (strictly adhering to the **`vignette: 0` zero vignette rule**), with visual details governed by `DESIGN.md`.
 
 Do not remove a navigation item to simplify implementation unless the user explicitly asks for it.
 
-Projects and Practice can remain placeholders until their content models are implemented.
+### Mobile Navigation Drawer Rule:
+All full-screen mobile menu drawers must be rendered via `createPortal(drawer, document.body)` to avoid clipping and entrapment inside parent containers with CSS `backdrop-filter`.
 
 ---
 
-# 18. Notes Page Contract
+# 18. Notes Page & Responsive Layout Contract
 
 The Notes landing page must expose the nested active topic structure.
 
 Selecting a note must navigate to its actual note route.
 
-Each note page must contain three major regions:
-
+### Desktop Layout (`>= 1024px` / `>= 1100px`):
 ```text
-Left    = topic/navigation panel
-Middle  = actual Markdown content
-Right   = overview + reference files
+Left (280px)   = sticky topic/navigation panel
+Middle         = actual Markdown note content (max-width 820px)
+Right (240px)  = in-page Table of Contents + Reference Python files + Practice link
+```
+
+### Mobile & Tablet Layout (`< 1024px`):
+```text
+Left           = off-canvas slide-out drawer (320px max) with backdrop blur, body scroll locking,
+                 auto-close on note tap, and a floating 'Topics' pill button when closed.
+Middle         = primary reading area with touch-scrollable breadcrumbs,
+                 collapsible 'On this page' Table of Contents accordion (< 1100px),
+                 and stacked Prev/Next navigation cards.
 ```
 
 The left region:
-
 - highlights the current note;
 - is hideable/collapsible;
 - keeps the current branch visible.
 
 The middle region:
-
-- renders Markdown faithfully;
-- supports formatted code;
-- provides code-copy behavior.
+- renders Markdown faithfully with Prism syntax highlighting;
+- supports formatted code with copy feedback;
+- provides horizontal touch scrolling for tables and code blocks.
 
 The right region:
-
 - derives its overview from Markdown headings;
-- scrolls to the selected heading;
-- lists reference `.py` files.
-
-Do not hard-code a note's overview into its React page.
+- scrolls smoothly to the selected heading;
+- lists reference `.py` files opening the in-page code viewer modal;
+- provides direct jump links to related Practice exercises.
 
 ---
 
-# 19. Markdown Heading Rules
+# 19. Connected Theory & Practice Pairing Contract
+
+The `practice/` domain mirrors the exact same topic and subtopic folder hierarchy as `notes/`:
+
+```text
+notes/NN-topic/NN-subtopic/NN-name.md
+practice/NN-topic/NN-subtopic/NN-name.md
+```
+
+### Pairing Rule:
+1. When a practice file exists with the matching slug/name in the same subfolder structure as a note, the system treats them as a **Connected Theory & Practice Pair**.
+2. **Note Detail UI**: Must render a prominent "Practice Related Exercises" button in the overview/right panel linking directly to `/practice/<topic>/<subtopic>/<name>`.
+3. **Practice UI**: Must render a "View Theory Notes" button linking directly back to `/notes/<topic>/<subtopic>/<name>`.
+4. The content tracker must record these bidirectional routes in `metadata.json`.
+
+---
+
+# 20. Markdown Heading Rules
 
 Heading IDs must be deterministic and unique.
 

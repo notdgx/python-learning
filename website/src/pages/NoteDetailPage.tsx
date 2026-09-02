@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, Link } from 'react-router-dom';
-import { Calendar, Clock, ArrowLeft, WarningCircle } from '@phosphor-icons/react';
+import { Calendar, Clock, ArrowLeft, WarningCircle, ListBullets, CaretDown, CaretUp } from '@phosphor-icons/react';
 import { getNoteByRoute, getTopicTree, getAdjacentNotes } from '../services/contentService';
 import { renderMarkdownToHtml } from '../utils/markdown';
 import { TopicSidebar } from '../components/notes/TopicSidebar';
@@ -12,7 +12,13 @@ import { ErrorBoundary } from '../components/common/ErrorBoundary';
 
 export const NoteDetailPage: React.FC = () => {
   const location = useLocation();
-  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [sidebarOpen, setSidebarOpen] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return window.innerWidth >= 1024;
+    }
+    return true;
+  });
+  const [mobileTocOpen, setMobileTocOpen] = useState(false);
 
   // Derive note by full current path
   const noteDoc = getNoteByRoute(location.pathname);
@@ -97,7 +103,8 @@ export const NoteDetailPage: React.FC = () => {
             minWidth: 0,
             padding: '36px 40px 80px',
             maxWidth: '900px',
-            margin: '0 auto'
+            margin: '0 auto',
+            overflowX: 'hidden'
           }}
           className="note-main-content"
         >
@@ -109,13 +116,13 @@ export const NoteDetailPage: React.FC = () => {
           />
 
           {/* Title & Metadata Header */}
-          <header style={{ marginBottom: '28px', paddingBottom: '16px', borderBottom: '1px solid var(--color-hairline)' }}>
-            <h1 style={{ fontSize: '2.4rem', color: 'var(--color-ink)', fontWeight: 600, letterSpacing: '-0.02em', marginBottom: '12px' }}>
+          <header style={{ marginBottom: '24px', paddingBottom: '16px', borderBottom: '1px solid var(--color-hairline)' }}>
+            <h1 className="note-detail-title" style={{ fontSize: '2.4rem', color: 'var(--color-ink)', fontWeight: 600, letterSpacing: '-0.02em', marginBottom: '12px' }}>
               {noteDoc.metadata.title}
             </h1>
 
             {/* Date & Time metadata */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '16px', fontSize: '12.5px', color: 'var(--color-mute)', flexWrap: 'wrap' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '14px', fontSize: '12.5px', color: 'var(--color-mute)', flexWrap: 'wrap' }}>
               {noteDoc.metadata.date && (
                 <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
                   <Calendar size={14} color="var(--color-stone)" />
@@ -128,11 +135,61 @@ export const NoteDetailPage: React.FC = () => {
                   <span>{noteDoc.metadata.time}</span>
                 </div>
               )}
-              <div style={{ color: 'var(--color-ash)', fontSize: '11px', fontFamily: 'var(--font-mono)' }}>
+              <div style={{ color: 'var(--color-ash)', fontSize: '11px', fontFamily: 'var(--font-mono)', wordBreak: 'break-all' }}>
                 {noteDoc.metadata.sourcePath}
               </div>
             </div>
           </header>
+
+          {/* Mobile-Only Collapsible Table of Contents & References */}
+          {noteDoc.metadata.headings.length > 0 && (
+            <div className="mobile-toc-container">
+              <button
+                type="button"
+                onClick={() => setMobileTocOpen((prev) => !prev)}
+                style={{
+                  width: '100%',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  padding: '10px 14px',
+                  backgroundColor: 'var(--color-surface)',
+                  border: '1px solid var(--color-hairline)',
+                  borderRadius: mobileTocOpen ? 'var(--radius-md) var(--radius-md) 0 0' : 'var(--radius-md)',
+                  color: 'var(--color-ink)',
+                  fontSize: '13px',
+                  fontWeight: 600,
+                  cursor: 'pointer',
+                  transition: 'all 0.15s ease'
+                }}
+                aria-expanded={mobileTocOpen}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <ListBullets size={16} color="var(--color-mute)" />
+                  <span>On this page ({noteDoc.metadata.headings.length} sections)</span>
+                </div>
+                {mobileTocOpen ? <CaretUp size={14} /> : <CaretDown size={14} />}
+              </button>
+
+              {mobileTocOpen && (
+                <div
+                  style={{
+                    padding: '14px',
+                    backgroundColor: 'var(--color-surface-elevated)',
+                    border: '1px solid var(--color-hairline)',
+                    borderTop: 'none',
+                    borderRadius: '0 0 var(--radius-md) var(--radius-md)',
+                    marginBottom: '16px'
+                  }}
+                >
+                  <TableOfContents headings={noteDoc.metadata.headings} />
+                  {noteDoc.metadata.references.length > 0 && (
+                    <ReferenceFileList references={noteDoc.metadata.references} />
+                  )}
+                </div>
+              )}
+            </div>
+          )}
 
           {/* Rendered Markdown Body */}
           <article
@@ -166,14 +223,26 @@ export const NoteDetailPage: React.FC = () => {
         </aside>
 
         <style>{`
+          .mobile-toc-container {
+            display: none;
+            margin-bottom: 24px;
+          }
           @media (min-width: 1100px) {
             .toc-sidebar {
               display: block !important;
             }
           }
+          @media (max-width: 1099px) {
+            .mobile-toc-container {
+              display: block !important;
+            }
+          }
           @media (max-width: 768px) {
             .note-main-content {
-              padding: 24px 16px 60px !important;
+              padding: 20px 16px 64px !important;
+            }
+            .note-detail-title {
+              font-size: 1.85rem !important;
             }
           }
         `}</style>
